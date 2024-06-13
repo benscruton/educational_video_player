@@ -1,0 +1,10 @@
+{
+  "name": "educational_video_player",
+  "version": "1.0.0",
+  "description": "Showcase for Scope Labs application",
+  "main": "index.js",
+  "repository": "https://github.com/benscruton/educational_video_player.git",
+  "author": "benscruton <benjamin.scruton@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
