@@ -1,15 +1,42 @@
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import {
   VideoComments,
   VideoPlayer
 } from "../components";
+import { getSingleVideo } from "../utils/api";
 
 const VideoPage = () => {
-  return (
-    <div style={{border: "2px solid purple"}}>
-      <h2>Video Page</h2>
-      <VideoPlayer />
+  const [video, setVideo] = useState(null);
+  const {videoId} = useParams();
 
-      <VideoComments />
+useEffect(() => {
+    getSingleVideo(videoId)
+      .then(rsp => {
+        setVideo(rsp.data);
+      })
+      .catch(e => console.log(e));
+  }, [videoId]);
+
+  return (
+    <div className = "container">
+      <h2>{video ? video.title : "Loading..."}</h2>
+
+      {video ?
+        <>
+          <VideoPlayer url={video.video_url}/>
+        
+          <VideoComments />
+
+          <p>
+            <Link to = {`/users/${video.user_id}`}>
+              {"<--"} Back to all of this user's videos
+            </Link>
+          </p>
+        </>
+        :
+        <>Loading...</>
+      }
     </div>
   );
 };
