@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 import { getUserVideos } from "../utils/api";
 
-import ReactPlayer from "react-player";
-
 const UserVideos = ({userId}) => {
   const [videos, setVideos] = useState(null);
   const [error, setError] = useState(null);
@@ -23,6 +21,10 @@ const UserVideos = ({userId}) => {
 
   return (
     <>
+      <h2 className = "is-size-3 has-text-centered">
+        Videos for user {userId}
+      </h2>
+
       {error ? error :
         videos ?
           videos.length ?

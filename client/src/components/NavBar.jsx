@@ -36,13 +36,24 @@ const NavBar = ({
             Find User Videos
           </Link>
 
-
           <Link
             className = "navbar-item has-text-white"
             to = "/videos"
           >
             Add Video
           </Link>
+
+          {userId ?
+            <Link
+              className = "navbar-item has-text-white"
+              to = {`/users/${userId}`}
+            >
+              My videos
+            </Link>
+            :
+            <></>
+          }
+
         </div>
 
         <div className = "navbar-end">
@@ -54,19 +65,19 @@ const NavBar = ({
           <div className = "navbar-item">
             <div className = "buttons">
               {userId ?
-                <a
+                <div
                   className = "button is-warning"
                   onClick = {logOut}
                 >
                   Log out
-                </a>
+                </div>
                 :
-                <a
+                <div
                   className = "button is-primary"
                   onClick = {() => setShowLoginModal(true)}
                 >
                   Log In
-                </a>
+                </div>
               }
 
               <button

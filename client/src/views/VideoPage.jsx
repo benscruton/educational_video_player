@@ -20,11 +20,21 @@ useEffect(() => {
 
   return (
     <div className = "container">
-      <h2>{video ? video.title : "Loading..."}</h2>
+      <h2>
+        {video ? video.title : "Loading..."}
+      </h2>
 
       {video ?
         <>
           <VideoPlayer url={video.video_url}/>
+
+          <a
+            href = {video.video_url}
+            target = "_blank"
+            rel = "noopener noreferrer"
+          >
+            Open video source
+          </a>
         
           <VideoComments />
 

@@ -5,11 +5,10 @@ import {
   SearchUserForm,
   UserVideos
 } from "../components";
-import ReactPlayer from "react-player";
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const {userId} = useParams();
+  const {profileUserId} = useParams();
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearchSubmit = e => {
@@ -20,6 +19,12 @@ const UserPage = () => {
 
   return (
     <div className = "container">
+      {profileUserId ?
+        <UserVideos userId = {profileUserId}/>
+        :
+        <></>
+      }
+
       <SearchUserForm
         title = "Search for a user's videos"
         label = "User ID"
@@ -28,12 +33,6 @@ const UserPage = () => {
         setInput = {setSearchInput}
         handleSubmit = {handleSearchSubmit}
       />
-
-      {userId ?
-        <UserVideos userId = {userId}/>
-        :
-        <></>
-      }
     </div>
   );
 };
