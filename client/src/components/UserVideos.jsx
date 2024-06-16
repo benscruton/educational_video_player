@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import { getUserVideos } from "../utils/api";
+import { VideoListDisplay } from "../components";
 
 const UserVideos = ({userId}) => {
   const [videos, setVideos] = useState(null);
@@ -28,15 +28,12 @@ const UserVideos = ({userId}) => {
       {error ? error :
         videos ?
           videos.length ?
-            videos.map(v => {
-              return (
-                <p key={v.id}>
-                  <Link to = {`/videos/${v.id}`}>
-                    {v.title}
-                  </Link>
-                </p>
-              );
-            })
+            videos.map(video =>
+              <VideoListDisplay
+                key = {video.id}
+                video = {video}
+              />
+            )
             :
             "No videos found for this user."
           :

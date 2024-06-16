@@ -5,6 +5,7 @@ import UserVideos from "./UserVideos";
 import VideoComments from "./VideoComments";
 import VideoControls from "./VideoControls";
 import VideoForm from "./VideoForm";
+import VideoListDisplay from "./VideoListDisplay";
 import VideoPlayer from "./VideoPlayer";
 
 export {
@@ -15,5 +16,6 @@ export {
   VideoComments,
   VideoControls,
   VideoForm,
+  VideoListDisplay,
   VideoPlayer
 };
