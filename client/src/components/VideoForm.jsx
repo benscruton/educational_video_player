@@ -1,7 +1,16 @@
-const VideoForm = ({inputs, setInputs, handleSubmit}) => {
+const VideoForm = ({
+  inputs,
+  setInputs,
+  errors,
+  setErrors,
+  handleSubmit
+}) => {
   const handleChange = e => {
     setInputs({...inputs,
       [e.target.name]: e.target.value
+    });
+    setErrors({...errors,
+      [e.target.name]: ""
     });
   };
   
@@ -26,13 +35,16 @@ const VideoForm = ({inputs, setInputs, handleSubmit}) => {
               Title
           </label>
           <input
-            className = "input"
+            className = {`input ${errors.title ? "is-danger" : ""}`}
             type = "text"
             id = "title"
             name = "title"
             value = {inputs.title}
             onChange = {handleChange}
           />
+          <p className = "help is-danger">
+            {errors.title}
+          </p>
         </div>
 
         <div className = "field">
@@ -43,13 +55,16 @@ const VideoForm = ({inputs, setInputs, handleSubmit}) => {
               Video URL
           </label>
           <input
-            className = "input"
+            className = {`input ${errors.videoUrl ? "is-danger" : ""}`}
             type = "text"
             id = "videoUrl"
             name = "videoUrl"
             value = {inputs.videoUrl}
             onChange = {handleChange}
           />
+          <p className = "help is-danger">
+            {errors.videoUrl}
+          </p>
         </div>
 
         <div className = "field">

@@ -15,13 +15,13 @@ const VideoListDisplay = ({video}) => {
         setPreviewUrl(rsp.data?.thumbnail_url || logoIcon);
       })
       .catch(e => console.log(e));
-  }, []);
+  }, [video.video_url]);
 
   return (
     <>
       <img
         src = {previewUrl}
-        alt = {`Preview for ${video.title}`}
+        alt = {`Thumbnail for ${video.title}`}
       />
       <p>
         <Link to = {`/videos/${video.id}`}>

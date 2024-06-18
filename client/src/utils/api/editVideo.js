@@ -6,7 +6,7 @@ const sampleDataFormat = {
   description: "string"
 };
 
-const editVideo = data => {
+const editVideo = async data => {
 
 };
 

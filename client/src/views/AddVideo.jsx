@@ -3,30 +3,36 @@ import { useContext, useState } from "react";
 import { VideoForm } from "../components";
 import { createVideo } from "../utils/api";
 import { AppContext } from "../context";
+import { useNavigate } from "react-router-dom";
 
 const AddVideo = () => {
   const {userId} = useContext(AppContext);
-  const emptyInputs = {
+  const navigate = useNavigate();
+  const emptyFields = {
     title: "",
     videoUrl: "",
     description: ""
   };
 
-  const [inputs, setInputs] = useState(emptyInputs);
+  const [inputs, setInputs] = useState(emptyFields);
+  const [inputErrors, setInputErrors] = useState(emptyFields);
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    const result = createVideo({
+    createVideo({
       user_id: userId,
       title: inputs.title,
       video_url: inputs.videoUrl,
       description: inputs.description
-    });
-
-    if(!result.success) console.log("whoops");
-
-    console.log(result);
+    })
+      .then(result => {
+        if(!result.success){
+          return setInputErrors(result.errors);
+        }
+        navigate(`/videos/${result.video.id}`);
+      })
+      .catch(e => console.log("whoops", e));
   };
 
   return (
@@ -34,6 +40,8 @@ const AddVideo = () => {
       <VideoForm
         inputs = {inputs}
         setInputs = {setInputs}
+        errors = {inputErrors}
+        setErrors = {setInputErrors}
         handleSubmit = {handleSubmit}
       />
     </div>

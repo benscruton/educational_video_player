@@ -12,8 +12,8 @@ const VideoPage = () => {
 
 useEffect(() => {
     getSingleVideo(videoId)
-      .then(rsp => {
-        setVideo(rsp.data);
+      .then(video => {
+        setVideo(video);
       })
       .catch(e => console.log(e));
   }, [videoId]);
