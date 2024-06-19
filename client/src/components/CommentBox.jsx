@@ -12,7 +12,7 @@ const CommentBox = ({comment}) => {
       className = {`message has-background-light ${isUserComment ? "is-success" : "is-dark"}`}
     >
       <header className = "message-header">
-        <p className = "card-header-title has-text-white">
+        <p className = "has-text-white">
           {comment.userId} {isUserComment ? "(me)" : ""}&nbsp; &nbsp;
           <span className = "has-text-weight-light has-text-light is-size-7">
             {formatCommentTime(comment.createdAt, userTimeZone)}

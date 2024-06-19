@@ -21,24 +21,26 @@ const UserVideos = ({profileUserId}) => {
 
   return (
     <>
-      <h2 className = "is-size-3 has-text-centered">
+      <h2 className = "is-size-3 has-text-centered mb-3">
         Videos for user {profileUserId}
       </h2>
 
-      {error ? error :
-        videos ?
-          videos.length ?
-            videos.map(video =>
-              <VideoListDisplay
-                key = {video.id}
-                video = {video}
-              />
-            )
+      <div className = "columns is-multiline is-centered">
+        {error ? error :
+          videos ?
+            videos.length ?
+              videos.map(video =>
+                <VideoListDisplay
+                  key = {video.id}
+                  video = {video}
+                />
+              )
+              :
+              "No videos found for this user."
             :
-            "No videos found for this user."
-          :
-          "Loading..."
-      }
+            "Loading..."
+        }
+      </div>
     </>
   );
 };

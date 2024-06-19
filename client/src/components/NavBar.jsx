@@ -14,7 +14,7 @@ const NavBar = ({
 
   return (
     <nav
-      className = "navbar is-danger"
+      className = "navbar is-danger mb-5"
       role = "navigation"
       aria-label = "main navigation"
     >

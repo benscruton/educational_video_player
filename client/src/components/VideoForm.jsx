@@ -19,8 +19,8 @@ const VideoForm = ({
       className = "card"
       onSubmit = {handleSubmit}
     >
-      <div className = "card-header has-text-centered has-background-info">
-        <h2 className = "card-header-title is-centered">
+      <div className = "card-header has-text-centered has-background-link">
+        <h2 className = "card-header-title is-centered has-text-white">
           Add a new video
         </h2>
       </div>
@@ -41,6 +41,7 @@ const VideoForm = ({
             name = "title"
             value = {inputs.title}
             onChange = {handleChange}
+
           />
           <p className = "help is-danger">
             {errors.title}

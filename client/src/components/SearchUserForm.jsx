@@ -16,8 +16,8 @@ const SearchUserForm = ({
       className = "card"
       onSubmit = {handleSubmit}
     >
-      <div className = "card-header has-text-centered has-background-info">
-        <h2 className = "card-header-title is-centered">
+      <div className = "card-header has-background-link">
+        <h2 className = "card-header-title is-centered has-text-white">
           {title}
         </h2>
       </div>

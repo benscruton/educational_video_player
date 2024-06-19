@@ -23,7 +23,9 @@ function App() {
   const [userTimeZone, setUserTimeZone] = useState(localStorage.getItem("evp_timezone") || null);
 
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [thumbnailUrlCache, setThumbnailUrlCache] = useState({});
 
+  // Get user time zone
   useEffect(() => {
     if(!userTimeZone){
       console.log("Getting time zone...");
@@ -35,7 +37,13 @@ function App() {
 
   return (
     <AppContext.Provider
-      value = {{userId, setUserId, userTimeZone}}
+      value = {{
+        userId,
+        setUserId,
+        userTimeZone,
+        thumbnailUrlCache,
+        setThumbnailUrlCache
+      }}
     >
       <div className = "has-background-white">
         <Router>
@@ -50,8 +58,6 @@ function App() {
             setUserId = {setUserId}
             setShowLoginModal = {setShowLoginModal}
           />
-
-          <p>hello this is App.js</p>
 
           <Routes>
             <Route
