@@ -21,10 +21,8 @@ const AddVideo = () => {
     e.preventDefault();
 
     createVideo({
-      user_id: userId,
-      title: inputs.title,
-      video_url: inputs.videoUrl,
-      description: inputs.description
+      ...inputs,
+      userId: userId
     })
       .then(result => {
         if(!result.success){

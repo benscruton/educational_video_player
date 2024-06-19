@@ -20,16 +20,16 @@ useEffect(() => {
 
   return (
     <div className = "container">
-      <h2>
+      <h2 className = "has-text-centered is-size-2">
         {video ? video.title : "Loading..."}
       </h2>
 
       {video ?
         <>
-          <VideoPlayer url={video.video_url}/>
+          <VideoPlayer url={video.videoUrl}/>
 
           <a
-            href = {video.video_url}
+            href = {video.videoUrl}
             target = "_blank"
             rel = "noopener noreferrer"
           >
@@ -41,8 +41,8 @@ useEffect(() => {
           />
 
           <p>
-            <Link to = {`/users/${video.user_id}`}>
-              {"<--"} Back to all of this user's videos
+            <Link to = {`/users/${video.userId}`}>
+              {"<--"} Back to all of <span className = "has-text-weight-bold">{video.userId}</span>'s videos
             </Link>
           </p>
         </>

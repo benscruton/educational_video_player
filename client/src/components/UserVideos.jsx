@@ -3,26 +3,26 @@ import { useState, useEffect } from "react";
 import { getUserVideos } from "../utils/api";
 import { VideoListDisplay } from "../components";
 
-const UserVideos = ({userId}) => {
+const UserVideos = ({profileUserId}) => {
   const [videos, setVideos] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getUserVideos(userId)
-      .then(rsp => {
-        setVideos(rsp.data);
+    getUserVideos(profileUserId)
+      .then(result => {
+        setVideos(result);
         setError(null);
       })
       .catch(e => {
         console.log(e);
         setError("Sorry, something went wrong.");
       });
-  }, [userId]);
+  }, [profileUserId]);
 
   return (
     <>
       <h2 className = "is-size-3 has-text-centered">
-        Videos for user {userId}
+        Videos for user {profileUserId}
       </h2>
 
       {error ? error :

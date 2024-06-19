@@ -15,7 +15,7 @@ const validateComment = comment => {
   const errors = {};
   let hasErrors = false;
 
-  if(!comment.video_id){
+  if(!comment.videoId){
     hasErrors = true;
     errors.videoId = "Attribute video_id is missing";
   }
@@ -23,9 +23,9 @@ const validateComment = comment => {
     hasErrors = true;
     errors.content = "Your comment is empty";
   }
-  if(!comment.user_id){
+  if(!comment.userId){
     hasErrors = true;
-    errors.user_id = "Attribute user_id is missing.";
+    errors.userId = "Attribute user_id is missing.";
   }
 
   return {errors, hasErrors};
@@ -42,24 +42,35 @@ const createComment = async comment => {
     };
   }
 
-  const newComment = {
-    created_at: dayjs.utc(new Date()),
+  const commentId = generateId();
+  const commentCreatedAt = dayjs.utc(new Date());
+
+  const commentSnakeCase = {
+    created_at: commentCreatedAt,
     content: comment.content,
-    video_id: comment.video_id,
-    user_id: comment.user_id,
-    id: generateId()
+    video_id: comment.videoId,
+    user_id: comment.userId,
+    id: commentId
   };
 
-  data.comments.push(newComment);
+  const commentCamelCase = {
+    createdAt: commentCreatedAt,
+    content: comment.content,
+    videoId: comment.videoId,
+    userId: comment.userId,
+    id: commentId
+  };
 
-  const video = data.videos.find(v => v.id === comment.video_id);
+  data.comments.push(commentSnakeCase);
+
+  const video = data.videos.find(v => v.id === comment.videoId);
   video.num_comments++;
 
   localStorage.setItem("evp_data", JSON.stringify(data));
 
   return {
     success: true,
-    comment: newComment
+    comment: commentCamelCase
   }
 };
 

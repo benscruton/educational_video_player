@@ -2,14 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { createComment, getVideoComments } from "../utils/api";
 import { CommentForm, CommentBox } from "../components";
 import { AppContext } from "../context";
-import {formatCommentTime } from "../utils";
 
 
 const VideoComments = ({videoId}) => {
-  const {
-    userId,
-    userTimeZone
-  } = useContext(AppContext);
+  const {userId} = useContext(AppContext);
 
   const [comments, setComments] = useState(null);
   const [inputContent, setInputContent] = useState("");
@@ -32,8 +28,8 @@ const VideoComments = ({videoId}) => {
     e.preventDefault();
 
     createComment({
-      video_id: videoId,
-      user_id: userId,
+      videoId,
+      userId,
       content: inputContent
     })
       .then((result) => {
@@ -70,6 +66,10 @@ const VideoComments = ({videoId}) => {
         handleChange = {handleChange}
         handleSubmit = {addComment}
       />
+
+      <button onClick = {() => console.log(comments)} className = "button is-danger">
+        Log comments
+      </button>
     </>
   );
 };

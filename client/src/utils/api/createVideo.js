@@ -16,19 +16,19 @@ const validateVideo = video => {
   const errors = {};
   let hasErrors = false;
 
-  if(!video.user_id){
+  if(!video.userId){
     hasErrors = true;
-    errors.user_id = "Attribute user_id is missing";
+    errors.userId = "Attribute user_id is missing";
   }
   if(!video.description && video.description !== ""){
     hasErrors = true;
     errors.description = "Attribute description is missing"; 
   }
-  if(!video.video_url){
+  if(!video.videoUrl){
     hasErrors = true;
     errors.videoUrl = "Be sure to include a URL for your video!";
   }
-  else if(!ReactPlayer.canPlay(video.video_url)){
+  else if(!ReactPlayer.canPlay(video.videoUrl)){
     hasErrors = true;
     errors.videoUrl = "Unfortunately, LearnWell can't find a playable video at this URL.";
   }
@@ -51,23 +51,35 @@ const createVideo = async video => {
 
   const data = JSON.parse(localStorage.getItem("evp_data")) || require("../data/emptydata.json");
 
-  const newVideo = {
-    created_at: dayjs.utc(new Date()),
-    video_url: video.video_url,
-    user_id: video.user_id,
+  const videoId = generateId();
+  const videoCreatedAt = dayjs.utc(new Date());
+  
+  const videoSnakeCase = {
+    created_at: videoCreatedAt,
+    video_url: video.videoUrl,
+    user_id: video.userId,
     description: video.description,
     title: video.title,
     num_comments: 0,
-    id: generateId()
+    id: videoId
   };
 
-  data.videos.push(newVideo);
+  const videoCamelCase = {
+    createdAt: videoCreatedAt,
+    videoUrl: video.videoUrl,
+    userId: video.userId,
+    description: video.description,
+    num_comments: 0,
+    id: videoId
+  }
+
+  data.videos.push(videoSnakeCase);
 
   localStorage.setItem("evp_data", JSON.stringify(data));
 
   return {
     success: true,
-    video: newVideo
+    video: videoCamelCase
   }
 };
 

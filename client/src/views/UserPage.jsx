@@ -20,7 +20,7 @@ const UserPage = () => {
   return (
     <div className = "container">
       {profileUserId ?
-        <UserVideos userId = {profileUserId}/>
+        <UserVideos profileUserId = {profileUserId}/>
         :
         <></>
       }

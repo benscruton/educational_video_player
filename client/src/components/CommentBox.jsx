@@ -5,7 +5,7 @@ import { formatCommentTime } from "../utils";
 
 const CommentBox = ({comment}) => {
   const {userId, userTimeZone} = useContext(AppContext);
-  const isUserComment = userId === comment.user_id;
+  const isUserComment = userId === comment.userId;
 
   return (
     <div
@@ -13,9 +13,9 @@ const CommentBox = ({comment}) => {
     >
       <header className = "message-header">
         <p className = "card-header-title has-text-white">
-          {comment.user_id} {isUserComment ? "(me)" : ""}&nbsp; &nbsp;
+          {comment.userId} {isUserComment ? "(me)" : ""}&nbsp; &nbsp;
           <span className = "has-text-weight-light has-text-light is-size-7">
-            {formatCommentTime(comment.created_at, userTimeZone)}
+            {formatCommentTime(comment.createdAt, userTimeZone)}
           </span>
         </p>
       </header>
