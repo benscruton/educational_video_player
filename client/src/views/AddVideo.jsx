@@ -41,6 +41,7 @@ const AddVideo = () => {
         errors = {inputErrors}
         setErrors = {setInputErrors}
         handleSubmit = {handleSubmit}
+        isDisabled = {!userId}
       />
     </div>
   );

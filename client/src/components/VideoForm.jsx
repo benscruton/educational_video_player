@@ -3,7 +3,8 @@ const VideoForm = ({
   setInputs,
   errors,
   setErrors,
-  handleSubmit
+  handleSubmit,
+  isDisabled
 }) => {
   const handleChange = e => {
     setInputs({...inputs,
@@ -25,7 +26,10 @@ const VideoForm = ({
         </h2>
       </div>
 
-      <div className = "card-content has-background-light">
+      <div className = "card-content has-background-light has-text-weight-bold">
+        <p className = "has-text-danger has-text-centered">
+          {isDisabled ? "Log in to add a video!" : ""}
+        </p>
 
         <div className = "field">
           <label
@@ -35,13 +39,13 @@ const VideoForm = ({
               Title
           </label>
           <input
-            className = {`input ${errors.title ? "is-danger" : ""}`}
+            className = {`input has-background-white ${errors.title ? "is-danger" : ""}`}
             type = "text"
             id = "title"
             name = "title"
             value = {inputs.title}
             onChange = {handleChange}
-
+            disabled = {isDisabled}
           />
           <p className = "help is-danger">
             {errors.title}
@@ -56,12 +60,13 @@ const VideoForm = ({
               Video URL
           </label>
           <input
-            className = {`input ${errors.videoUrl ? "is-danger" : ""}`}
+            className = {`input has-background-white ${errors.videoUrl ? "is-danger" : ""}`}
             type = "text"
             id = "videoUrl"
             name = "videoUrl"
             value = {inputs.videoUrl}
             onChange = {handleChange}
+            disabled = {isDisabled}
           />
           <p className = "help is-danger">
             {errors.videoUrl}
@@ -76,12 +81,13 @@ const VideoForm = ({
               Description
           </label>
           <input
-            className = "input"
+            className = "input has-background-white"
             type = "text"
             id = "description"
             name = "description"
             value = {inputs.description}
             onChange = {handleChange}
+            disabled = {isDisabled}
           />
         </div>
         
