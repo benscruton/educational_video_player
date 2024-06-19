@@ -36,7 +36,9 @@ useEffect(() => {
             Open video source
           </a>
         
-          <VideoComments />
+          <VideoComments
+            videoId = {videoId}
+          />
 
           <p>
             <Link to = {`/users/${video.user_id}`}>

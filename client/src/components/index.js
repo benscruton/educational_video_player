@@ -1,3 +1,5 @@
+import CommentBox from "./CommentBox";
+import CommentForm from "./CommentForm";
 import LoginModal from "./LoginModal";
 import NavBar from "./NavBar";
 import SearchUserForm from "./SearchUserForm";
@@ -9,6 +11,8 @@ import VideoListDisplay from "./VideoListDisplay";
 import VideoPlayer from "./VideoPlayer";
 
 export {
+  CommentBox,
+  CommentForm,
   LoginModal,
   NavBar,
   SearchUserForm,

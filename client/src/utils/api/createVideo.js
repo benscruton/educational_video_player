@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import {generateId} from ".";
 import ReactPlayer from "react-player";
 
@@ -50,7 +52,7 @@ const createVideo = async video => {
   const data = JSON.parse(localStorage.getItem("evp_data")) || require("../data/emptydata.json");
 
   const newVideo = {
-    created_at: new Date(),
+    created_at: dayjs.utc(new Date()),
     video_url: video.video_url,
     user_id: video.user_id,
     description: video.description,

@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.7.2",
     "bulma": "^1.0.1",
+    "dayjs": "^1.11.11",
+    "jstz": "^2.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-player": "^2.16.0",

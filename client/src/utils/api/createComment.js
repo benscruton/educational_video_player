@@ -1,5 +1,10 @@
 // POST to /videos/comments
 
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import generateId from "./generateId";
+dayjs.extend(utc);
+
 const sampleDataFormat = {
   video_id: "string",
   content: "string",
@@ -20,7 +25,7 @@ const validateComment = comment => {
   }
   if(!comment.user_id){
     hasErrors = true;
-    "Attribute user_id is missing.";
+    errors.user_id = "Attribute user_id is missing.";
   }
 
   return {errors, hasErrors};
@@ -29,8 +34,16 @@ const validateComment = comment => {
 const createComment = async comment => {
   const data = JSON.parse(localStorage.getItem("evp_data")) || require("../data/emptydata.json");
 
+  const validation = validateComment(comment);
+  if(validation.hasErrors){
+    return {
+      success: false,
+      errors: validation.errors
+    };
+  }
+
   const newComment = {
-    created_at: new Date(),
+    created_at: dayjs.utc(new Date()),
     content: comment.content,
     video_id: comment.video_id,
     user_id: comment.user_id,
