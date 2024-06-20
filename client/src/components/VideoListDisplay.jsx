@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { videoIcon } from "../static/img";
 import { Link } from "react-router-dom";
 import { getThumbnailUrl } from "../utils";
+import TextIcon from "./TextIcon";
 
 const VideoListDisplay = ({video}) => {
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -42,6 +43,14 @@ const VideoListDisplay = ({video}) => {
               {video.description}
             </p>
           </div>
+          <footer className = "card-footer has-background-light">
+            <div className = "card-footer-item">
+              <TextIcon
+                text = {`${video.numComments} comments`}
+                icon = {video.numComments ? "bi-chat-text" : "bi-chat"}
+              />
+            </div>
+          </footer>
         </Link>
       </div>
     </div>

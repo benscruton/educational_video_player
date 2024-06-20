@@ -10,6 +10,7 @@ import VideoControls from "./VideoControls";
 import VideoForm from "./VideoForm";
 import VideoListDisplay from "./VideoListDisplay";
 import VideoPlayer from "./VideoPlayer";
+import VideoPlayerContainer from "./VideoPlayerContainer";
 
 export {
   CommentBox,
@@ -23,5 +24,6 @@ export {
   VideoControls,
   VideoForm,
   VideoListDisplay,
-  VideoPlayer
+  VideoPlayer,
+  VideoPlayerContainer
 };

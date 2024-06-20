@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   VideoComments,
-  VideoPlayer,
+  VideoPlayerContainer,
   TextIcon
 } from "../components";
 import { editVideo, getSingleVideo } from "../utils/api";
@@ -91,7 +91,7 @@ const VideoPage = () => {
                 </h2>
               }
 
-              <VideoPlayer url={video.videoUrl}/>
+              <VideoPlayerContainer url={video.videoUrl}/>
 
               <div className = "has-text-right">
               <a
@@ -124,7 +124,7 @@ const VideoPage = () => {
 
               {video.userId === userId ?
                 isEditing ?
-                  <div className = "has-text-centered">
+                  <div className = "has-text-centered mt-5">
                     <button
                       className = "button is-success has-text-white"
                       type = "submit"
@@ -136,7 +136,7 @@ const VideoPage = () => {
                     </button>
                   </div>
                   :
-                  <div className = "has-text-centered">
+                  <div className = "has-text-centered mt-5">
                     <div
                       className = "button is-warning"
                       type = "button"
@@ -161,10 +161,6 @@ const VideoPage = () => {
                 />
               </Link>
             </p>
-          
-            <VideoComments
-              videoId = {videoId}
-            />
           </>
           :
           <h2 className = "has-text-centered is-size-2">
@@ -172,6 +168,10 @@ const VideoPage = () => {
           </h2>
         }
       </form>
+
+      <VideoComments
+        videoId = {videoId}
+      />
     </div>
   );
 };

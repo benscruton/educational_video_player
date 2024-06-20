@@ -1,43 +1,59 @@
-import { useState } from "react";
+import React, { Component } from "react";
 import ReactPlayer from "react-player";
-import { VideoControls } from "../components";
-import styles from "../static/css/VideoPlayer.module.css";
 
-const VideoPlayer = ({url}) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackRate, setPlaybackRate] = useState(1);
+class VideoPlayer extends Component {
+  ref = player => {
+    this.player = player;
+  }
 
-  return (
-    <div className = {styles.container}>
+  seekToTime = mark => {
+    this.player.seekTo(mark, "seconds");
+  }
+
+  getTime = () => this.player.getCurrentTime();
+
+  render(){
+    const {
+      styles,
+      url,
+      isPlaying,
+      setIsPlaying,
+      playbackRate,
+      setPlayerFunctions,
+      setIsReady
+    } = this.props;
+
+    const handleReady = () => {
+      setPlayerFunctions({
+        seekToTime: this.seekToTime,
+        getTime: this.getTime
+      });
+      setIsReady(true);
+    };
+
+    return (
+      <>
       <ReactPlayer
+        ref = {this.ref}
         className = {styles.reactPlayer}
-        width = "640px"
-        height = "360px"
         url = {url}
+        height = "100%"
+        width = "100%"
         controls = {false}
         playing = {isPlaying}
         light = {false}
-        playIcon = {<button onClick={() => setIsPlaying(!isPlaying)}>Play</button>}
-        onPlay = {() => {
-          setIsPlaying(true);
-        }}
-        onPause = {() => {
-          setIsPlaying(false);
-        }}
-        playbackRate = {playbackRate}
+        onPlay = {() => setIsPlaying(true)}
+        onPause = {() => setIsPlaying(false)}
         pip = {false}
+        onReady = {handleReady}
       />
-
-      <div className={styles.overlay}>
-        <VideoControls 
-          isPlaying = {isPlaying}
-          setIsPlaying = {setIsPlaying}
-          playbackRate = {playbackRate}
-          setPlaybackRate = {setPlaybackRate}
-        />
-      </div>
-    </div>
-  );
-};
+      <p
+        style = {{position: "absolute", top: "-30px"}}
+        onClick = {() => this.goTo10Seconds()}
+      > hello there </p>
+      </>
+    );
+  }
+}
 
 export default VideoPlayer;
