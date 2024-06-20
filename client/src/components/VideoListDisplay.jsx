@@ -13,7 +13,7 @@ const VideoListDisplay = ({video}) => {
           setPreviewUrl(result.thumbnailUrl);
         }
       })
-  }, []);
+  }, [video.videoUrl]);
 
   return (
     <div className = "column is-6-tablet is-4-desktop is-3-widescreen">

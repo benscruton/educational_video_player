@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SearchUserForm } from "../components";
+import { SearchUserForm, TextIcon } from "../components";
 
 const LoginModal = ({
   setShowLoginModal,
@@ -26,17 +26,21 @@ const LoginModal = ({
         <SearchUserForm
           title = "Log in"
           label = "Your username"
-          submit = "Log in"
+          submit = {<TextIcon text = "Log in" icon = "bi-box-arrow-in-right"/>}
+          autoFocus = {true}
           input = {loginInput}
           setInput = {setLoginInput}
           handleSubmit = {handleLoginSubmit}
           cancelButton = {(
-            <a
-              className = "button is-danger ml-2"
+            <div
+              className = "button is-danger has-text-white ml-2"
               onClick = {() => setShowLoginModal(false)}
             >
-              Cancel
-            </a>
+              <TextIcon
+                text = "Cancel"
+                icon = "bi-x-octagon-fill"
+              />
+            </div>
           )}
         />
       </div>

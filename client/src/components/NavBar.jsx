@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { logoWhite } from '../static/img';
+import { TextIcon } from "../components";
 
 const NavBar = ({
   userId,
@@ -33,14 +34,22 @@ const NavBar = ({
             className = "navbar-item has-text-white"
             to = "/users"
           >
-            Find User Videos
+            <TextIcon
+              text = "Find User Videos"
+              icon = "bi-search"
+              iconClasses = "is-size-5"
+            />
           </Link>
 
           <Link
             className = "navbar-item has-text-white"
             to = "/videos"
           >
-            Add Video
+            <TextIcon
+              text = "Add Video"
+              icon = "bi-plus-lg"
+              iconClasses = "is-size-5"
+            />
           </Link>
 
           {userId ?
@@ -48,7 +57,11 @@ const NavBar = ({
               className = "navbar-item has-text-white"
               to = {`/users/${userId}`}
             >
-              My videos
+              <TextIcon
+                text = "My Videos"
+                icon = "bi-person-video2"
+                iconClasses = "is-size-5"
+              />
             </Link>
             :
             <></>
@@ -69,14 +82,20 @@ const NavBar = ({
                   className = "button is-warning"
                   onClick = {logOut}
                 >
-                  Log out
+                  <TextIcon
+                    text = "Log out"
+                    icon = "bi-box-arrow-right"
+                  />
                 </div>
                 :
                 <div
-                  className = "button is-primary"
+                  className = "button is-primary has-text-white"
                   onClick = {() => setShowLoginModal(true)}
                 >
-                  Log In
+                  <TextIcon
+                    text = "Log In"
+                    icon = "bi-box-arrow-in-right"
+                  />
                 </div>
               }
 

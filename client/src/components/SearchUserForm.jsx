@@ -2,6 +2,7 @@ const SearchUserForm = ({
   title,
   label,
   submit,
+  autoFocus,
   input,
   setInput,
   handleSubmit,
@@ -30,18 +31,21 @@ const SearchUserForm = ({
           >
             {label}
           </label>
-          <input
-            className = "input"
-            type = "text"
-            id = "userId"
-            name = "userId"
-            value = {input}
-            onChange = {handleChange}
-          />
+          <div className = "control">
+            <input
+              className = "input"
+              type = "text"
+              id = "userId"
+              name = "userId"
+              value = {input}
+              autoFocus = {autoFocus}
+              onChange = {handleChange}
+            />
+          </div>
         </div>
 
         <button
-          className = "button is-success"
+          className = "button is-success has-text-white"
           type = "submit"
         >
           {submit}

@@ -69,6 +69,7 @@ const createVideo = async video => {
     videoUrl: video.videoUrl,
     userId: video.userId,
     description: video.description,
+    title: video.title,
     num_comments: 0,
     id: videoId
   }

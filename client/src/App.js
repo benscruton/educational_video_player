@@ -36,7 +36,7 @@ function App() {
       setUserTimeZone(timezone.name());
       localStorage.setItem("evp_timezone", timezone.name());
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AppContext.Provider

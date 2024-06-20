@@ -3,6 +3,7 @@ import CommentForm from "./CommentForm";
 import LoginModal from "./LoginModal";
 import NavBar from "./NavBar";
 import SearchUserForm from "./SearchUserForm";
+import TextIcon from "./TextIcon";
 import UserVideos from "./UserVideos";
 import VideoComments from "./VideoComments";
 import VideoControls from "./VideoControls";
@@ -16,6 +17,7 @@ export {
   LoginModal,
   NavBar,
   SearchUserForm,
+  TextIcon,
   UserVideos,
   VideoComments,
   VideoControls,

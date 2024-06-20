@@ -1,3 +1,5 @@
+import TextIcon from "./TextIcon";
+
 const VideoForm = ({
   inputs,
   setInputs,
@@ -38,15 +40,18 @@ const VideoForm = ({
           >
               Title
           </label>
-          <input
-            className = {`input has-background-white ${errors.title ? "is-danger" : ""}`}
-            type = "text"
-            id = "title"
-            name = "title"
-            value = {inputs.title}
-            onChange = {handleChange}
-            disabled = {isDisabled}
-          />
+          <div className = "control">
+            <input
+              className = {`input has-background-white ${errors.title ? "is-danger" : ""}`}
+              type = "text"
+              id = "title"
+              name = "title"
+              value = {inputs.title}
+              onChange = {handleChange}
+              disabled = {isDisabled}
+              autoFocus
+            />
+          </div>
           <p className = "help is-danger">
             {errors.title}
           </p>
@@ -59,15 +64,17 @@ const VideoForm = ({
           >
               Video URL
           </label>
-          <input
-            className = {`input has-background-white ${errors.videoUrl ? "is-danger" : ""}`}
-            type = "text"
-            id = "videoUrl"
-            name = "videoUrl"
-            value = {inputs.videoUrl}
-            onChange = {handleChange}
-            disabled = {isDisabled}
-          />
+          <div className = "control">
+            <input
+              className = {`input has-background-white ${errors.videoUrl ? "is-danger" : ""}`}
+              type = "text"
+              id = "videoUrl"
+              name = "videoUrl"
+              value = {inputs.videoUrl}
+              onChange = {handleChange}
+              disabled = {isDisabled}
+            />
+          </div>
           <p className = "help is-danger">
             {errors.videoUrl}
           </p>
@@ -80,22 +87,27 @@ const VideoForm = ({
           >
               Description
           </label>
-          <input
-            className = "input has-background-white"
-            type = "text"
-            id = "description"
-            name = "description"
-            value = {inputs.description}
-            onChange = {handleChange}
-            disabled = {isDisabled}
-          />
+          <div className = "control">
+            <textarea
+              className = "textarea has-background-white"
+              type = "text"
+              id = "description"
+              name = "description"
+              value = {inputs.description}
+              onChange = {handleChange}
+              disabled = {isDisabled}
+            />
+          </div>
         </div>
         
         <button
-          className = "button is-success"
+          className = "button is-success has-text-white"
           type = "submit"
         >
-          Add Video
+          <TextIcon
+            text = "Add Video"
+            icon = "bi-play-btn-fill"
+          />
         </button>
 
       </div>
