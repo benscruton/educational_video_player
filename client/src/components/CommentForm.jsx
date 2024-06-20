@@ -20,9 +20,8 @@ const CommentForm = ({
           <textarea
             className = "textarea"
             onChange = {handleChange}
-          >
-            {content}
-          </textarea>
+            value = {content}
+          />
         </div>
 
         <button

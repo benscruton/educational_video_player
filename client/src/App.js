@@ -19,11 +19,14 @@ import {
 import {AppContext} from "./context";
 
 function App() {
-  const [userId, setUserId] = useState(localStorage.getItem("evp_user_id") || null);
-  const [userTimeZone, setUserTimeZone] = useState(localStorage.getItem("evp_timezone") || null);
+  const [userId, setUserId] = useState(
+    localStorage.getItem("evp_user_id") || null
+  );
+  const [userTimeZone, setUserTimeZone] = useState(
+    localStorage.getItem("evp_timezone") || null
+  );
 
   const [showLoginModal, setShowLoginModal] = useState(false);
-  const [thumbnailUrlCache, setThumbnailUrlCache] = useState({});
 
   // Get user time zone
   useEffect(() => {
@@ -40,9 +43,7 @@ function App() {
       value = {{
         userId,
         setUserId,
-        userTimeZone,
-        thumbnailUrlCache,
-        setThumbnailUrlCache
+        userTimeZone
       }}
     >
       <div className = "has-background-white">

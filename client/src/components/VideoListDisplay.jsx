@@ -1,29 +1,19 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { videoIcon } from "../static/img";
 import { Link } from "react-router-dom";
 import { getThumbnailUrl } from "../utils";
-import { AppContext } from "../context";
 
 const VideoListDisplay = ({video}) => {
-  const {thumbnailUrlCache, setThumbnailUrlCache} = useContext(AppContext);
-  const [previewUrl, setPreviewUrl] = useState(videoIcon);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   useEffect(() => {
-    if(thumbnailUrlCache[video.id]){
-      return setPreviewUrl(thumbnailUrlCache[video.id]);
-    }
     getThumbnailUrl(video.videoUrl)
       .then(result => {
-        console.log(result);
         if(result.success){
           setPreviewUrl(result.thumbnailUrl);
-          setThumbnailUrlCache({
-            ...thumbnailUrlCache,
-            [video.id]: result.thumbnailUrl
-          });
         }
       })
-  }, [video.videoUrl]);
+  }, []);
 
   return (
     <div className = "column is-6-tablet is-4-desktop is-3-widescreen">
@@ -40,7 +30,7 @@ const VideoListDisplay = ({video}) => {
         <div className = "card-image has-background-light">
           <figure className = "image">
             <img
-              src = {previewUrl}
+              src = {previewUrl || videoIcon}
               alt = {`Thumbnail for ${video.title}`}
             />
           </figure>

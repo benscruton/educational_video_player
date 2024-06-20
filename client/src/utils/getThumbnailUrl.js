@@ -3,12 +3,14 @@ import axios from "axios";
 const noEmbedUrl = "https://noembed.com/embed?url=";
 
 const getThumbnailUrl = async videoUrl => {
-  console.log("Getting thumbnail");
   return axios.get(`${noEmbedUrl}${videoUrl}`)
-    .then(rsp => ({
-      success: !!rsp.data?.thumbnail_url,
-      thumbnailUrl: rsp.data?.thumbnail_url
-    }))
+    .then(rsp => {
+      const thumbnailUrl = rsp.data?.thumbnail_url;
+      return {
+        success: !!rsp.data?.thumbnail_url,
+        thumbnailUrl: thumbnailUrl
+      };
+    })
     .catch(e => ({
       success: false,
       error: e
