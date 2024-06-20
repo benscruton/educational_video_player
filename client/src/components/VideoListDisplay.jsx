@@ -17,31 +17,33 @@ const VideoListDisplay = ({video}) => {
 
   return (
     <div className = "column is-6-tablet is-4-desktop is-3-widescreen">
-      <Link
-        className = "card mx-2"
-        to = {`/videos/${video.id}`}
-      >
-        <header className = "card-header has-background-info">
-          <p className = "card-header-title is-centered is-size-5">
-            {video.title}
-          </p>
-        </header>
+      <div className = "px-1">
+        <Link
+          className = "card"
+          to = {`/videos/${video.id}`}
+        >
+          <header className = "card-header has-background-info">
+            <p className = "card-header-title is-centered is-size-5">
+              {video.title}
+            </p>
+          </header>
 
-        <div className = "card-image has-background-light">
-          <figure className = "image">
-            <img
-              src = {previewUrl || videoIcon}
-              alt = {`Thumbnail for ${video.title}`}
-            />
-          </figure>
-        </div>
+          <div className = "card-image has-background-light">
+            <figure className = "image">
+              <img
+                src = {previewUrl || videoIcon}
+                alt = {`Thumbnail for ${video.title}`}
+              />
+            </figure>
+          </div>
 
-        <div className = "card-content has-background-light">
-          <p>
-            {video.description}
-          </p>
-        </div>
-      </Link>
+          <div className = "card-content has-background-light">
+            <p>
+              {video.description}
+            </p>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 };

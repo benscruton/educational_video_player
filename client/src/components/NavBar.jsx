@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { Link } from 'react-router-dom';
 import { logoWhite } from '../static/img';
 import { TextIcon } from "../components";
@@ -8,6 +8,10 @@ const NavBar = ({
   setUserId,
   setShowLoginModal
 }) => {
+  const [isMenuActive, setIsMenuActive] = useState(false);
+
+  const toggleMenu = () => setIsMenuActive(!isMenuActive);
+
   const logOut = () => {
     setUserId(null);
     localStorage.removeItem("evp_user_id");
@@ -19,16 +23,29 @@ const NavBar = ({
       role = "navigation"
       aria-label = "main navigation"
     >
-      <div className = "navbar-brand mr-4">
-        <div className = "navbar-item">
+      <div className = "navbar-brand">
+        <div className = "navbar-item mr-4">
           <img
             src = {logoWhite}
             alt = "Learnwell logo"
           />
         </div>
+
+        <div
+          className = {`navbar-burger has-text-white ${isMenuActive ? "is-active" : ""}`}
+          role = "button"
+          aria-label = "menu"
+          aria-expanded = "false"
+          onClick = {toggleMenu}
+        >
+          <span aria-hidden />
+          <span aria-hidden />
+          <span aria-hidden />
+          <span aria-hidden />
+        </div>
       </div>
 
-      <div className = "navbar-menu">
+      <div className = {`navbar-menu ${isMenuActive ? "is-active" : ""}`}>
         <div className = "navbar-start">
           <Link
             className = "navbar-item has-text-white"
