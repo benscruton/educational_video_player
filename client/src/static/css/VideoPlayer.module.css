@@ -64,6 +64,11 @@
   /* border: 1px solid purple; */
 }
 
+.controlIconMedium{
+  font-size: 18pt;
+  cursor: pointer;
+}
+
 .controlIconSmall{
   font-size: 12pt;
   cursor: pointer;
@@ -80,7 +85,7 @@
 }
 
 .playProgressBar{
-  width: 75%;
+  width: 80%;
   margin: 0 10px;
   color: yellow;
 }

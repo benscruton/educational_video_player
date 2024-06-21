@@ -193,7 +193,8 @@ const VideoControls = ({
         {/* Fullscreen button */}
         <div>
           <i
-            className = {`${isFullScreen ? "" : ""} ${styles.controlIconLarge}`}
+            className = {`${isFullScreen ? "bi-fullscreen-exit" : "bi-arrows-fullscreen"} ${styles.controlIconMedium}`}
+            onClick = {toggleFullScreen}
           />
         </div>
       </div>
