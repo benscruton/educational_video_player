@@ -25,12 +25,15 @@ const NavBar = ({
       aria-label = "main navigation"
     >
       <div className = "navbar-brand">
-        <div className = "navbar-item mr-4">
+        <Link
+          className = "navbar-item mr-4"
+          to = "/"
+        >
           <img
             src = {logoWhite}
             alt = "Learnwell logo"
           />
-        </div>
+        </Link>
 
         <div
           className = {`navbar-burger has-text-white ${isMenuActive ? "is-active" : ""}`}

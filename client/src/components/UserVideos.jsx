@@ -25,7 +25,7 @@ const UserVideos = ({profileUserId}) => {
         Videos for user {profileUserId}
       </h2>
 
-      <div className = "columns is-multiline is-centered">
+      <div className = "columns is-multiline is-centered is-flex">
         {error ? error :
           videos ?
             videos.length ?

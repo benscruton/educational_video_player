@@ -34,7 +34,7 @@ const AddVideo = () => {
   };
 
   return (
-    <div className = "container">
+    <div className = "container px-1">
       <VideoForm
         inputs = {inputs}
         setInputs = {setInputs}

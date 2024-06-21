@@ -19,7 +19,7 @@ const UserPage = () => {
   };
 
   return (
-    <div className = "container">
+    <div className = "container px-1">
       {profileUserId ?
         <UserVideos profileUserId = {profileUserId}/>
         :

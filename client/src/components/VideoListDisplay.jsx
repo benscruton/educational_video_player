@@ -18,41 +18,39 @@ const VideoListDisplay = ({video}) => {
 
   return (
     <div className = "column is-6-tablet is-4-desktop is-3-widescreen">
-      <div className = "px-1">
-        <Link
-          className = "card"
-          to = {`/videos/${video.id}`}
-        >
-          <header className = "card-header has-background-info">
-            <p className = "card-header-title is-centered is-size-5">
-              {video.title}
-            </p>
-          </header>
+      <Link
+        className = "card"
+        to = {`/videos/${video.id}`}
+      >
+        <header className = "card-header has-background-info">
+          <p className = "card-header-title is-centered is-size-5">
+            {video.title}
+          </p>
+        </header>
 
-          <div className = "card-image has-background-light">
-            <figure className = "image">
-              <img
-                src = {previewUrl || videoIcon}
-                alt = {`Thumbnail for ${video.title}`}
-              />
-            </figure>
-          </div>
+        <div className = "card-image has-background-light">
+          <figure className = "image">
+            <img
+              src = {previewUrl || videoIcon}
+              alt = {`Thumbnail for ${video.title}`}
+            />
+          </figure>
+        </div>
 
-          <div className = "card-content has-background-light">
-            <p>
-              {video.description}
-            </p>
+        <div className = "card-content has-background-light">
+          <p>
+            {video.description}
+          </p>
+        </div>
+        <footer className = "card-footer has-background-light">
+          <div className = "card-footer-item">
+            <TextIcon
+              text = {`${video.numComments} comments`}
+              icon = {video.numComments ? "bi-chat-text" : "bi-chat"}
+            />
           </div>
-          <footer className = "card-footer has-background-light">
-            <div className = "card-footer-item">
-              <TextIcon
-                text = {`${video.numComments} comments`}
-                icon = {video.numComments ? "bi-chat-text" : "bi-chat"}
-              />
-            </div>
-          </footer>
-        </Link>
-      </div>
+        </footer>
+      </Link>
     </div>
   );
 };

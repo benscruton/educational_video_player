@@ -21,7 +21,6 @@ const VideoControls = ({
   useEffect(() => {
     if(isPlaying){
       const refreshTime = setInterval(() => {
-        console.log("Getting time mark");
         setCurrentTimeMark(playerFunctions.getTime());
       }, Math.floor(1000 / playbackRate));
 
@@ -96,7 +95,6 @@ const VideoControls = ({
 
   const seekProgressBar = e => {
     const mark = Math.floor((e.target.value * videoDuration * 10) / 10);
-    console.log(mark);
     setCurrentTimeMark(mark);
     seekVideo(mark);
   };

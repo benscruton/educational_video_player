@@ -1,4 +1,5 @@
 import "bulma/css/bulma.min.css";
+import "./App.css";
 import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
@@ -13,6 +14,7 @@ import {
 } from "./components";
 import {
   AddVideo,
+  HomePage,
   UserPage,
   VideoPage
 } from "./views";
@@ -63,7 +65,7 @@ function App() {
           <Routes>
             <Route
               path = "/"
-              element = {<>home page</>}
+              element = {<HomePage />}
             />
 
             <Route

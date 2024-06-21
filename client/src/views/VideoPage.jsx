@@ -64,7 +64,7 @@ const VideoPage = () => {
   };
 
   return (
-    <div className = "container">
+    <div className = "container px-1">
       <form onSubmit = {handleSubmit}>
         {video ?
           <>
