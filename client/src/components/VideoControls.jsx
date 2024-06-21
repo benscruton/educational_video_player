@@ -16,16 +16,29 @@ const VideoControls = ({
   toggleFullScreen
 }) => {
   const [currentTimeMark, setCurrentTimeMark] = useState(playerFunctions.getTime());
+  const [videoDuration, setVideoDuration] = useState(null);
 
   useEffect(() => {
-    const refreshTime = setInterval(() => {
-      setCurrentTimeMark(playerFunctions.getTime());
-    }, 1000);
+    if(isPlaying){
+      const refreshTime = setInterval(() => {
+        console.log("Getting time mark");
+        setCurrentTimeMark(playerFunctions.getTime());
+      }, Math.floor(1000 / playbackRate));
 
-    return () => {
-      clearInterval(refreshTime);
+      return () => {
+        clearInterval(refreshTime);
+      }
     }
-  }, []);
+  }, [isPlaying, playbackRate, playerFunctions]); 
+
+  /* 
+    Update video duration if it changes -- some
+    players (e.g. Twitch) seem to return 0 until
+    playing has started, which led to seek failures
+  */
+  useEffect(() => {
+    setVideoDuration(playerFunctions.getDuration());
+  }, [playerFunctions.getDuration()]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const adjustVolume = info => {
     if(info?.target?.value){
@@ -62,7 +75,7 @@ const VideoControls = ({
   };
 
   const seekVideo = mark => {
-    playerFunctions.seekToTime(mark);
+    playerFunctions.seekToTime(mark, "seconds");
     setCurrentTimeMark(mark);
   };
 
@@ -82,8 +95,10 @@ const VideoControls = ({
   };
 
   const seekProgressBar = e => {
-    setCurrentTimeMark(e.target.value);
-    seekVideo(e.target.value);
+    const mark = Math.floor((e.target.value * videoDuration * 10) / 10);
+    console.log(mark);
+    setCurrentTimeMark(mark);
+    seekVideo(mark);
   };
   
   return (
@@ -180,13 +195,13 @@ const VideoControls = ({
             className = {styles.playProgressBar}
             type = "range"
             min = "0"
-            max = {playerFunctions.getDuration()}
+            max = "1"
             step = "any"
-            value = {currentTimeMark}
+            value = {currentTimeMark / videoDuration}
             onChange = {seekProgressBar}
           />
           <span>
-            {formatSeconds(playerFunctions.getDuration())}
+            {formatSeconds(videoDuration)}
           </span>
         </div>
 

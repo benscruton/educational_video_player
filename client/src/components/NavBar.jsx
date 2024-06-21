@@ -15,6 +15,7 @@ const NavBar = ({
   const logOut = () => {
     setUserId(null);
     localStorage.removeItem("evp_user_id");
+    setIsMenuActive(false);
   };
 
   return (
@@ -50,6 +51,7 @@ const NavBar = ({
           <Link
             className = "navbar-item has-text-white"
             to = "/users"
+            onClick = {() => setIsMenuActive(false)}
           >
             <TextIcon
               text = "Find User Videos"
@@ -61,6 +63,7 @@ const NavBar = ({
           <Link
             className = "navbar-item has-text-white"
             to = "/videos"
+            onClick = {() => setIsMenuActive(false)}
           >
             <TextIcon
               text = "Add Video"
@@ -73,6 +76,7 @@ const NavBar = ({
             <Link
               className = "navbar-item has-text-white"
               to = {`/users/${userId}`}
+              onClick = {() => setIsMenuActive(false)}
             >
               <TextIcon
                 text = "My Videos"
@@ -107,7 +111,10 @@ const NavBar = ({
                 :
                 <div
                   className = "button is-primary has-text-white"
-                  onClick = {() => setShowLoginModal(true)}
+                  onClick = {() => {
+                    setShowLoginModal(true);
+                    setIsMenuActive(false);
+                  }}
                 >
                   <TextIcon
                     text = "Log In"
@@ -115,17 +122,6 @@ const NavBar = ({
                   />
                 </div>
               }
-
-              <button
-                className = "button is-warning"
-                onClick = {() => {
-                  const evpData = JSON.parse(localStorage.getItem("evp_data"));
-                  evpData.videos.pop();
-                  localStorage.setItem("evp_data", JSON.stringify(evpData));
-                }}
-              >
-                Remove Latest Video
-              </button>
             </div>
           </div>
         </div>
