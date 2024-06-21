@@ -26,7 +26,7 @@
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 20%;
+  /* height: 20%; */
   margin: 0px;
   z-index: 10;
   color: yellow;
@@ -36,12 +36,51 @@
   text-align: center;
 }
 
-.controlIcon{
+.secondRow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.thirdRow{
+  display: flex;
+  justify-content: space-between;
+}
+
+.playbackContainer{
+  /* background-color: lightblue; */
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.playbackContainer div{
+  display: flex;
+  justify-content: center;
+}
+
+.controlIconLarge{
   font-size: 25pt;
   cursor: pointer;
   /* border: 1px solid purple; */
 }
 
+.controlIconSmall{
+  font-size: 12pt;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
 .playPause{
   margin: 0 25px;
+}
+
+.playProgressBarContainer{
+  width: 90%;
+  padding: 0 10px;
+}
+
+.playProgressBar{
+  width: 75%;
+  margin: 0 10px;
+  color: yellow;
 }

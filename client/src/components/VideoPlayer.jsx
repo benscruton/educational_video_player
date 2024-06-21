@@ -12,6 +12,8 @@ class VideoPlayer extends Component {
 
   getTime = () => this.player.getCurrentTime();
 
+  getDuration = () => this.player.getDuration();
+
   render(){
     const {
       styles,
@@ -19,6 +21,8 @@ class VideoPlayer extends Component {
       isPlaying,
       setIsPlaying,
       playbackRate,
+      volume,
+      isVolumeMuted,
       setPlayerFunctions,
       setIsReady
     } = this.props;
@@ -26,31 +30,31 @@ class VideoPlayer extends Component {
     const handleReady = () => {
       setPlayerFunctions({
         seekToTime: this.seekToTime,
-        getTime: this.getTime
+        getTime: this.getTime,
+        getDuration: this.getDuration
       });
       setIsReady(true);
     };
 
     return (
       <>
-      <ReactPlayer
-        ref = {this.ref}
-        className = {styles.reactPlayer}
-        url = {url}
-        height = "100%"
-        width = "100%"
-        controls = {false}
-        playing = {isPlaying}
-        light = {false}
-        onPlay = {() => setIsPlaying(true)}
-        onPause = {() => setIsPlaying(false)}
-        pip = {false}
-        onReady = {handleReady}
-      />
-      <p
-        style = {{position: "absolute", top: "-30px"}}
-        onClick = {() => this.goTo10Seconds()}
-      > hello there </p>
+        <ReactPlayer
+          ref = {this.ref}
+          className = {styles.reactPlayer}
+          url = {url}
+          height = "100%"
+          width = "100%"
+          controls = {false}
+          playing = {isPlaying}
+          playbackRate = {playbackRate}
+          volume = {isVolumeMuted ? 0 : volume / 100}
+          light = {false}
+          onPlay = {() => setIsPlaying(true)}
+          onPause = {() => setIsPlaying(false)}
+          pip = {false}
+          onReady = {handleReady}
+          onEnded = {() => setIsPlaying(false)}
+        />
       </>
     );
   }
