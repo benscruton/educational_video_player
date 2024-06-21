@@ -1,3 +1,4 @@
+import styles from "../static/css/VideoPlayer.module.css";
 import React, { Component } from "react";
 import ReactPlayer from "react-player";
 
@@ -16,7 +17,6 @@ class VideoPlayer extends Component {
 
   render(){
     const {
-      styles,
       url,
       isPlaying,
       setIsPlaying,

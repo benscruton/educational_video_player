@@ -20,7 +20,7 @@ const VideoListDisplay = ({video}) => {
     <div className = "column is-6-tablet is-4-desktop is-3-widescreen">
       <Link
         className = "card"
-        to = {`/videos/${video.id}`}
+        to = {`/videos/${video.userId}/${video.id}`}
       >
         <header className = "card-header has-background-info">
           <p className = "card-header-title is-centered is-size-5">

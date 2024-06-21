@@ -9,9 +9,9 @@ const VideoPlayerContainer = ({url}) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [playerFunctions, setPlayerFunctions] = useState(null);
-  const [playTime, setPlayTime] = useState(0);
   const [volume, setVolume] = useState(70);
   const [isVolumeMuted, setIsVolumeMuted] = useState(false);
+  const [areControlsHidden, setAreControlsHidden] = useState(false);
 
   const toggleFullScreen = () => {
     screenfull.toggle(document.getElementById("video-player-container"));
@@ -28,48 +28,62 @@ const VideoPlayerContainer = ({url}) => {
     };
   }, []);
 
-  return (
-    <div className = {styles.wrapper}>
-      <div
-        id = "video-player-container"
-        className = {styles.container}
-      >
+  const videoControls = (isReady ?
+    <VideoControls
+      isPlaying = {isPlaying}
+      setIsPlaying = {setIsPlaying}
+      playbackRate = {playbackRate}
+      setPlaybackRate = {setPlaybackRate}
+      volume = {volume}
+      setVolume = {setVolume}
+      isVolumeMuted = {isVolumeMuted}
+      setIsVolumeMuted = {setIsVolumeMuted}
+      isFullScreen = {isFullScreen}
+      toggleFullScreen = {toggleFullScreen}
+      playerFunctions = {playerFunctions}
+    />
+    :
+    <p className = "has-text-centered">
+      Loading...
+    </p>
+  );
 
-        <VideoPlayer
-          styles = {styles}
-          url = {url}
-          isPlaying = {isPlaying}
-          setIsPlaying = {setIsPlaying}
-          playbackRate = {playbackRate}
-          volume = {volume}
-          isVolumeMuted = {isVolumeMuted}
-          setPlayerFunctions = {setPlayerFunctions}
-          setIsReady = {setIsReady}
-        />
-        
-        <div className={styles.overlay}>
-          {isReady ?
-            <VideoControls
-              styles = {styles}
-              isPlaying = {isPlaying}
-              setIsPlaying = {setIsPlaying}
-              playbackRate = {playbackRate}
-              setPlaybackRate = {setPlaybackRate}
-              volume = {volume}
-              setVolume = {setVolume}
-              isVolumeMuted = {isVolumeMuted}
-              setIsVolumeMuted = {setIsVolumeMuted}
-              isFullScreen = {isFullScreen}
-              toggleFullScreen = {toggleFullScreen}
-              playerFunctions = {playerFunctions}
-            />
+  return (
+    <div className = {styles.playerControlWrapper}>
+      <div className = {styles.wrapper}>
+        <div
+          id = "video-player-container"
+          className = {styles.container}
+        >
+
+          <VideoPlayer
+            url = {url}
+            isPlaying = {isPlaying}
+            setIsPlaying = {setIsPlaying}
+            playbackRate = {playbackRate}
+            volume = {volume}
+            isVolumeMuted = {isVolumeMuted}
+            setPlayerFunctions = {setPlayerFunctions}
+            setIsReady = {setIsReady}
+          />
+          
+          {isFullScreen ?
+            <div className={styles.controlsOverlay}>
+              {videoControls}
+            </div>
             :
-            <p className = "has-text-centered">
-              Loading...
-            </p>
+            <></>
           }
         </div>
       </div>
+
+      {isFullScreen ?
+        <></>
+        :
+        <div className = {styles.controlsBeneath}>
+          {videoControls}
+        </div>
+      }
     </div>
   );
 };

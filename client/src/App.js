@@ -79,7 +79,7 @@ function App() {
             />
 
             <Route
-              path = "/videos/:videoId"
+              path = "/videos/:videoUserId/:videoId"
               element = {<VideoPage />}
             />
 

@@ -28,7 +28,7 @@ const AddVideo = () => {
         if(!result.success){
           return setInputErrors(result.errors);
         }
-        navigate(`/videos/${result.video.id}`);
+        navigate(`/videos/${userId}/${result.video.id}`);
       })
       .catch(e => console.log("whoops", e));
   };
