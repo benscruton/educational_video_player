@@ -2,7 +2,7 @@ import styles from "../static/css/VideoPlayer.module.css";
 
 const FullscreenButton = ({
   isFullScreen,
-  toggleFullScreen 
+  toggleFullScreen
 }) => {
   return (
     <div>

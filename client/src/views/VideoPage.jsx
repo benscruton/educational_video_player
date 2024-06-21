@@ -16,6 +16,7 @@ const VideoPage = () => {
   const [inputErrors, setInputErrors] = useState({title: "", description: ""});
   const [isEditing, setIsEditing] = useState(false);
 
+
   useEffect(() => {
     getSingleVideo(videoId)
       .then(video => {
@@ -73,6 +74,7 @@ const VideoPage = () => {
 
   return (
     <div className = "container px-1">
+  
       {!video ?
         <h2 className = "has-text-centered is-size-2">
           Loading...
@@ -104,7 +106,9 @@ const VideoPage = () => {
             </h2>
           }
 
-          <VideoPlayerContainer url={video.videoUrl}/>
+          <VideoPlayerContainer
+            url={video.videoUrl}
+          />
 
           <div className = "has-text-right">
           <a

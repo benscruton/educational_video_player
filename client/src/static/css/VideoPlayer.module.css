@@ -123,3 +123,7 @@
   margin: 0 10px;
   color: yellow;
 }
+
+.instructionModal{
+  z-index: 20;
+}

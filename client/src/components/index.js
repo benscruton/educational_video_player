@@ -1,6 +1,7 @@
 import CommentBox from "./CommentBox";
 import CommentForm from "./CommentForm";
 import FullscreenButton from "./FullscreenButton";
+import FullscreenInstructionsModal from "./FullscreenInstructionsModal";
 import LoginModal from "./LoginModal";
 import NavBar from "./NavBar";
 import PlaybackProgressBar from "./PlaybackProgressBar";
@@ -21,6 +22,7 @@ export {
   CommentBox,
   CommentForm,
   FullscreenButton,
+  FullscreenInstructionsModal,
   LoginModal,
   NavBar,
   PlaybackProgressBar,

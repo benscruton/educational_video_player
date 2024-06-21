@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import screenfull from "screenfull";
-import { VideoControls, VideoPlayer } from "../components";
+import {
+  FullscreenInstructionsModal,
+  VideoControls,
+  VideoPlayer
+} from "../components";
 import styles from "../static/css/VideoPlayer.module.css";
 
 const VideoPlayerContainer = ({url}) => {
@@ -11,10 +15,30 @@ const VideoPlayerContainer = ({url}) => {
   const [playerFunctions, setPlayerFunctions] = useState(null);
   const [volume, setVolume] = useState(70);
   const [isVolumeMuted, setIsVolumeMuted] = useState(false);
-  const [areControlsHidden, setAreControlsHidden] = useState(false);
+  const [isInstructionModalShown, setIsInstructionModalShown] = useState(false);
+  const [hasSeenInstructions, setHasSeenInstructions] = useState(
+    !!localStorage.getItem("evp_has_seen_instructions")
+  )
 
   const toggleFullScreen = () => {
-    screenfull.toggle(document.getElementById("video-player-container"));
+    if(!hasSeenInstructions){
+      return setIsInstructionModalShown(true);
+    }
+    screenfull.toggle(document.getElementById(
+      "video-player-container"
+    ));
+  };
+
+  const proceedToFullscreen = () => {
+    setIsInstructionModalShown(false);
+    setHasSeenInstructions(true);
+    localStorage.setItem(
+      "evp_has_seen_instructions",
+      "1"
+    );
+    screenfull.request(document.getElementById(
+      "video-player-container"
+    ));
   };
 
   const updateFullscreenStatus = () =>
@@ -22,7 +46,6 @@ const VideoPlayerContainer = ({url}) => {
 
   useEffect(() => {
     screenfull.on("change", updateFullscreenStatus);
-
     return () => {
       screenfull.off("change", updateFullscreenStatus)
     };
@@ -50,6 +73,14 @@ const VideoPlayerContainer = ({url}) => {
 
   return (
     <div className = {styles.playerControlWrapper}>
+      {isInstructionModalShown ?
+        <FullscreenInstructionsModal
+          proceedToFullscreen = {proceedToFullscreen}
+        />
+        :
+        <></>
+      }
+
       <div className = {styles.wrapper}>
         <div
           id = "video-player-container"
