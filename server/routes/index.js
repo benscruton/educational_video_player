@@ -5,11 +5,15 @@ const apiRoutes = require("./api");
 
 router.use("/api", apiRoutes);
 
-// router.use((req, rsp) => {
-//   rsp.sendFile(path.join(
-//     __dirname,
-//     "../../client/build/index.html"
-//   ));
-// });
+router.use((req, rsp) => {
+  rsp.sendFile(path.join(
+    __dirname,
+    "..",
+    "..",
+    "client",
+    "build",
+    "index.html"
+  ));
+});
 
 module.exports = router;

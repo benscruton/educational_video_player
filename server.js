@@ -8,17 +8,20 @@ const routes = require("./server/routes");
 
 const app = express();
 
+app.use(express.static(path.join(
+  __dirname,
+  "client",
+  "build"
+)));
+
 app.use(
   cors(),
   express.json(),
   express.urlencoded({extended: true}),
   routes
 );
-// app.use(express.static(path.join(
-//   __dirname,
-//   "client",
-//   "build"
-// )));
+
+
 
 app.listen(port, () =>
   console.log("Listening on port", port)
