@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { getUserVideos } from "../utils/api";
 import { VideoListDisplay } from "../components";
+import { AppContext } from "../context";
 
 const UserVideos = ({profileUserId}) => {
+  const {serverUrl} = useContext(AppContext);
   const [videos, setVideos] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getUserVideos(profileUserId)
+    getUserVideos(profileUserId, serverUrl)
       .then(result => {
         setVideos(result);
         setError(null);

@@ -1,8 +1,9 @@
 const CommentForm = ({
-  errors,
+  error,
   content,
   handleChange,
-  handleSubmit
+  handleSubmit,
+  isDisabled
 }) => {
   return (
     <form
@@ -17,12 +18,23 @@ const CommentForm = ({
 
       <div className = "card-content">
         <div className = "content">
+          {isDisabled ?
+            <p className = "has-text-danger has-text-centered">
+              Log in to leave a comment!
+            </p>
+            :
+            <></>
+          }
           <textarea
             className = "textarea"
             onChange = {handleChange}
             value = {content}
+            disabled = {isDisabled}
           />
         </div>
+        <p className = "help is-danger">
+          {error}
+        </p>
 
         <button
           className = "button is-success"

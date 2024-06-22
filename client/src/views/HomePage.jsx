@@ -41,8 +41,12 @@ const HomePage = () => {
       </div>
 
       <p>
-        Happy learning!
+        Please note that some video platforms may require you to interact with a video before you will be able to use the video controls.
       </p>
+
+      <h2 className = "is-size-4 has-text-centered mt-3">
+        Happy learning!
+      </h2>
     </div>
   );
 };

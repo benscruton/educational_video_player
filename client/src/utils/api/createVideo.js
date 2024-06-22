@@ -1,6 +1,4 @@
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import {generateId} from ".";
+import axios from "axios";
 import ReactPlayer from "react-player";
 
 // Post to /videos
@@ -30,7 +28,7 @@ const validateVideo = video => {
   }
   else if(!ReactPlayer.canPlay(video.videoUrl)){
     hasErrors = true;
-    errors.videoUrl = "Unfortunately, LearnWell can't find a playable video at this URL.";
+    errors.videoUrl = "Unfortunately Learnwell can't find a playable video at this URL.";
   }
   if(!video.title){
     hasErrors = true;
@@ -40,7 +38,7 @@ const validateVideo = video => {
   return {errors, hasErrors};
 };
 
-const createVideo = async video => {
+const createVideo = async (video, serverUrl) => {
   const validation = validateVideo(video);
   if(validation.hasErrors){
     return {
@@ -49,39 +47,18 @@ const createVideo = async video => {
     };
   }
 
-  const data = JSON.parse(localStorage.getItem("evp_data")) || require("../data/emptydata.json");
-
-  const videoId = generateId();
-  const videoCreatedAt = dayjs.utc(new Date());
-  
-  const videoSnakeCase = {
-    created_at: videoCreatedAt,
-    video_url: video.videoUrl,
-    user_id: video.userId,
-    description: video.description,
-    title: video.title,
-    num_comments: 0,
-    id: videoId
-  };
-
-  const videoCamelCase = {
-    createdAt: videoCreatedAt,
-    videoUrl: video.videoUrl,
-    userId: video.userId,
-    description: video.description,
-    title: video.title,
-    num_comments: 0,
-    id: videoId
-  }
-
-  data.videos.push(videoSnakeCase);
-
-  localStorage.setItem("evp_data", JSON.stringify(data));
-
-  return {
-    success: true,
-    video: videoCamelCase
-  }
+  // Create the video
+  return axios.post(
+    `${serverUrl}/api/videos`,
+    video
+  )
+    .then(rsp => rsp.data)
+    .catch(e => {
+      return {
+        success: false,
+        errors: {title: e.message}
+      };
+    });
 };
 
 export default createVideo;

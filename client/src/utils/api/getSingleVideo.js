@@ -1,19 +1,15 @@
+import axios from "axios";
+
 // GET to /videos/single?video_id=
 
-const getSingleVideo = async videoId => {
-  const {videos} = JSON.parse(localStorage.getItem("evp_data"));
-
-  const video = videos.find(v => v.id === videoId);
-
-  return {
-    createdAt: video.created_at,
-    videoUrl: video.video_url,
-    userId: video.user_id,
-    description: video.description,
-    title: video.title,
-    numComments: video.num_comments,
-    id: video.id
-  };
+const getSingleVideo = async (videoId, serverUrl) => {
+  return axios.get(
+    `${serverUrl}/api/videos/${videoId}`
+  )
+    .then(rsp => rsp.data)
+    .catch(e => {
+      console.log(e);
+    });
 };
 
 export default getSingleVideo;

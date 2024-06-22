@@ -6,7 +6,7 @@ import { AppContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 const AddVideo = () => {
-  const {userId} = useContext(AppContext);
+  const {userId, serverUrl} = useContext(AppContext);
   const navigate = useNavigate();
   const emptyFields = {
     title: "",
@@ -20,15 +20,19 @@ const AddVideo = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    createVideo({
-      ...inputs,
-      userId: userId
-    })
+    createVideo(
+      {
+        ...inputs,
+        userId: userId
+      },
+      serverUrl
+    )
       .then(result => {
+        console.log(result);
         if(!result.success){
           return setInputErrors(result.errors);
         }
-        navigate(`/videos/${userId}/${result.video.id}`);
+        navigate(result.destination);
       })
       .catch(e => console.log("whoops", e));
   };

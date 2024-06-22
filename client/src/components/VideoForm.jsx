@@ -35,7 +35,7 @@ const VideoForm = ({
 
         <div className = "field">
           <label
-            className = "label"
+          className = "label"
             htmlFor = "title"
           >
               Title

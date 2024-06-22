@@ -2,9 +2,17 @@
   "name": "educational_video_player",
   "version": "1.0.0",
   "description": "Showcase for Scope Labs application",
-  "main": "index.js",
+  "main": "server.js",
   "repository": "https://github.com/benscruton/educational_video_player.git",
   "author": "benscruton <benjamin.scruton@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.11",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "path": "^0.12.7"
+  }
 }

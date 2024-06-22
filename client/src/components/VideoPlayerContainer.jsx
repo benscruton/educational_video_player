@@ -115,6 +115,17 @@ const VideoPlayerContainer = ({url}) => {
           {videoControls}
         </div>
       }
+
+      <div className = "has-text-right has-background-light">
+        <a
+          href = {url}
+          target = "_blank"
+          rel = "noopener noreferrer"
+          className = "has-text-centered mt-2 has-text-link"
+        >
+          Open video source
+        </a>
+      </div>
     </div>
   );
 };

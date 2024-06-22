@@ -1,10 +1,6 @@
-// PUT to /videos
+import axios from "axios";
 
-const sampleDataFormat = {
-  video_id: "string",
-  title: "string",
-  description: "string"
-};
+// PUT to /videos
 
 const validateVideo = video => {
   const errors = {};
@@ -18,9 +14,7 @@ const validateVideo = video => {
   return {errors, hasErrors};
 };
 
-const editVideo = async video => {
-  const data = JSON.parse(localStorage.getItem("evp_data")) || require("../data/emptydata.json");
-
+const editVideo = async (video, serverUrl) => {
   const validation = validateVideo(video);
   if(validation.hasErrors){
     return {
@@ -29,26 +23,15 @@ const editVideo = async video => {
     };
   }
 
-  const updatedVideo = data.videos.find(v => v.id === video.id);
-  updatedVideo.title = video.title;
-  updatedVideo.description = video.description;
-
-  localStorage.setItem("evp_data", JSON.stringify(data));
-
-  const camelCaseVideo = {
-    createdAt: updatedVideo.created_at,
-    videoUrl: updatedVideo.video_url,
-    userId: updatedVideo.user_id,
-    description: updatedVideo.description,
-    title: video.title,
-    numComments: updatedVideo.num_comments,
-    id: updatedVideo.id
-  }
-
-  return {
-    success: true,
-    video: camelCaseVideo
-  };
+  return axios.put(
+    `${serverUrl}/api/videos/${video.id}`,
+    {
+      title: video.title,
+      description: video.description
+    }
+  )
+    .then(rsp => rsp.data)
+    .catch(e => console.log(e));
 };
 
 export default editVideo;

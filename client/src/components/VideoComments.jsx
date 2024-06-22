@@ -5,14 +5,14 @@ import { AppContext } from "../context";
 
 
 const VideoComments = ({videoId}) => {
-  const {userId} = useContext(AppContext);
+  const {userId, serverUrl} = useContext(AppContext);
 
   const [comments, setComments] = useState(null);
   const [inputContent, setInputContent] = useState("");
   const [inputError, setInputError] = useState("");
 
   useEffect(() => {
-    getVideoComments(videoId)
+    getVideoComments(videoId, serverUrl)
       .then(videoComments => {
         setComments(videoComments);
       })
@@ -33,12 +33,14 @@ const VideoComments = ({videoId}) => {
       content: inputContent
     })
       .then((result) => {
+        console.log(result);
         if(!result.success){
           return setInputError(result?.errors?.content || "Sorry, something went wrong.");
         }
         setComments([...comments,
           result.comment
         ]);
+        setInputContent("");
       })
       .catch(e => console.log(e));
   };
@@ -65,6 +67,7 @@ const VideoComments = ({videoId}) => {
         content = {inputContent}
         handleChange = {handleChange}
         handleSubmit = {addComment}
+        isDisabled = {!userId}
       />
 
       <button onClick = {() => console.log(comments)} className = "button is-danger">

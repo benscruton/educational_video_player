@@ -1,3 +1,4 @@
+import styles from "../static/css/VideoPlayer.module.css";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -10,7 +11,7 @@ import { AppContext } from "../context";
 
 const VideoPage = () => {
   const {videoId, videoUserId} = useParams();
-  const {userId} = useContext(AppContext);
+  const {userId, serverUrl} = useContext(AppContext);
   const [video, setVideo] = useState(null);
   const [inputs, setInputs] = useState(null);
   const [inputErrors, setInputErrors] = useState({title: "", description: ""});
@@ -18,7 +19,7 @@ const VideoPage = () => {
 
 
   useEffect(() => {
-    getSingleVideo(videoId)
+    getSingleVideo(videoId, serverUrl)
       .then(video => {
         setVideo(video);
         setInputs({
@@ -45,17 +46,27 @@ const VideoPage = () => {
     if(inputs.title === video.title && inputs.description === video.description){
       return setIsEditing(false);
     }
-    editVideo({
-      ...inputs,
-      id: videoId
-    })
+    editVideo(
+      {
+        ...inputs,
+        id: videoId
+      },
+      serverUrl
+    )
       .then(result => {
         if(result.success){
-          setVideo(result.video);
+          setVideo({
+            ...video,
+            title: result.video.title,
+            description: result.video.description 
+          });
           setIsEditing(false);
         }
         else{
-          setInputErrors();
+          setInputErrors({
+            title: result.error,
+            description: ""
+          });
         }
       })
       .catch(e => {
@@ -109,17 +120,6 @@ const VideoPage = () => {
           <VideoPlayerContainer
             url={video.videoUrl}
           />
-
-          <div className = "has-text-right">
-          <a
-            href = {video.videoUrl}
-            target = "_blank"
-            rel = "noopener noreferrer"
-            className = "has-text-centered mt-2"
-          >
-            Open video source
-          </a>
-          </div>
 
           <h3 className = "is-size-4 has-text-centered mt-6">
             Description

@@ -25,7 +25,7 @@ const PlaybackProgressBar = ({
         min = "0"
         max = "1"
         step = "any"
-        value = {currentTimeMark / videoDuration}
+        value = {(currentTimeMark / videoDuration) || 0}
         onChange = {seekToTime}
       />
       <span>

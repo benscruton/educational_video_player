@@ -1,24 +1,12 @@
 import "bulma/css/bulma.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import jstz from "jstz";
 
-import {
-  LoginModal,
-  NavBar
-} from "./components";
-import {
-  AddVideo,
-  HomePage,
-  UserPage,
-  VideoPage
-} from "./views";
-import {AppContext} from "./context";
+import { LoginModal, NavBar } from "./components";
+import { AddVideo, HomePage, UserPage, VideoPage } from "./views";
+import { AppContext } from "./context";
 
 function App() {
   const [userId, setUserId] = useState(
@@ -32,7 +20,7 @@ function App() {
 
   // Get user time zone
   useEffect(() => {
-    if(!userTimeZone){
+    if (!userTimeZone) {
       console.log("Getting time zone...");
       const timezone = jstz.determine();
       setUserTimeZone(timezone.name());
@@ -40,54 +28,44 @@ function App() {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const serverUrl = "http://localhost:8000"
+
   return (
     <AppContext.Provider
-      value = {{
+      value={{
         userId,
         setUserId,
-        userTimeZone
+        userTimeZone,
+        serverUrl
       }}
     >
-      <div className = "has-background-white">
+      <div className="has-background-white">
         <Router>
-          {showLoginModal &&
+          {showLoginModal && (
             <LoginModal
-              setShowLoginModal = {setShowLoginModal}
-              setUserId = {setUserId}
+              setShowLoginModal={setShowLoginModal}
+              setUserId={setUserId}
             />
-          }
+          )}
           <NavBar
-            userId = {userId}
-            setUserId = {setUserId}
-            setShowLoginModal = {setShowLoginModal}
+            userId={userId}
+            setUserId={setUserId}
+            setShowLoginModal={setShowLoginModal}
           />
 
           <Routes>
-            <Route
-              path = "/"
-              element = {<HomePage />}
-            />
+            <Route path="/" element={<HomePage />} />
+
+            <Route path="/users" element={<UserPage />} />
+
+            <Route path="/users/:profileUserId" element={<UserPage />} />
 
             <Route
-              path = "/users"
-              element = {<UserPage />}
+              path="/videos/:videoUserId/:videoId"
+              element={<VideoPage />}
             />
 
-            <Route
-              path = "/users/:profileUserId"
-              element = {<UserPage />}
-            />
-
-            <Route
-              path = "/videos/:videoUserId/:videoId"
-              element = {<VideoPage />}
-            />
-
-            <Route
-              path = "/videos"
-              element = {<AddVideo />}
-            />
-   
+            <Route path="/videos" element={<AddVideo />} />
           </Routes>
         </Router>
       </div>
