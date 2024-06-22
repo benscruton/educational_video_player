@@ -19,7 +19,7 @@ const UserVideos = ({profileUserId}) => {
         console.log(e);
         setError("Sorry, something went wrong.");
       });
-  }, [profileUserId]);
+  }, [profileUserId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>

@@ -1,4 +1,3 @@
-import styles from "../static/css/VideoPlayer.module.css";
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -28,7 +27,7 @@ const VideoPage = () => {
         })
       })
       .catch(e => console.log(e));
-  }, [videoId]);
+  }, [videoId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = e => {
     setInputs({

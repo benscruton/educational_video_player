@@ -1,14 +1,4 @@
 import axios from "axios";
-import dayjs from "dayjs";
-
-
-// POST to /videos/comments
-
-const sampleDataFormat = {
-  video_id: "string",
-  content: "string",
-  user_id: "string"
-};
 
 const validateComment = comment => {
   const errors = {};

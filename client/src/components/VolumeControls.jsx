@@ -26,6 +26,7 @@ const VolumeControls = ({
       <div>
         <i
           className = {`${isVolumeMuted ? "bi-volume-mute-fill" : "bi-volume-down-fill"} ${styles.controlIconSmall}`}
+          title = {isVolumeMuted ? "Unmute" : "Mute"}
           onClick = {() => adjustVolume("mute")}
         />
         Volume: {isVolumeMuted ? "mute" : `${volume}%`}
@@ -33,6 +34,7 @@ const VolumeControls = ({
       <div>
         <i
           className = {`bi-volume-down-fill ${styles.controlIconSmall}`}
+          title = "Volume down"
           onClick = {() => adjustVolume("quieter")}
         />
         <input 
@@ -45,6 +47,7 @@ const VolumeControls = ({
         />
         <i
           className = {`bi-volume-up-fill ${styles.controlIconSmall}`}
+          title = "Volume up"
           onClick = {() => adjustVolume("louder")}
         />
       </div>

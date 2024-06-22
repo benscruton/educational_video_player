@@ -2,14 +2,6 @@ const axios = require("axios");
 const dayjs = require("dayjs");
 const serverUrl = process.env.SERVER_URL;
 
-// POST to /videos/comments
-
-const sampleDataFormat = {
-  video_id: "string",
-  content: "string",
-  user_id: "string"
-};
-
 const createComment = (req, rsp) => {
 const snake_case_comment = {
     video_id: req.params.videoId,

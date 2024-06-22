@@ -24,6 +24,7 @@ const PlaybackSpeedControls = ({
       <div>
         <i
           className = {`bi-speedometer2 ${styles.controlIconSmall}`}
+          title = "Reset playback speed"
           onClick = {() => adjustSpeed("reset")}
         />
         Speed: {playbackRate}x
@@ -31,6 +32,7 @@ const PlaybackSpeedControls = ({
       <div>
         <i
           className = {`bi-dash-circle ${styles.controlIconSmall}`}
+          title = "Slow down"
           onClick = {() => adjustSpeed("slower")}
         />
           <input
@@ -43,6 +45,7 @@ const PlaybackSpeedControls = ({
           />
         <i
           className = {`bi-plus-circle ${styles.controlIconSmall}`}
+          title = "Speed up"
           onClick = {() => adjustSpeed("faster")}
         />
       </div>

@@ -17,7 +17,7 @@ const VideoComments = ({videoId}) => {
         setComments(videoComments);
       })
       .catch(e => console.log(e));
-  }, [videoId]);
+  }, [videoId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = e => {
     setInputContent(e.target.value);

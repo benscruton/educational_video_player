@@ -1,15 +1,5 @@
 const axios = require("axios");
 const serverUrl = process.env.SERVER_URL;
-const dayjs = require("dayjs");
-
-// Post to /videos
-
-const sampleDataFormat = {
-  user_id: "string",
-  description: "string",
-  video_url: "string",
-  title: "string"
-}
 
 const createVideo = (req, rsp) => {
   const snake_case_video = {

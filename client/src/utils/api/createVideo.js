@@ -1,15 +1,6 @@
 import axios from "axios";
 import ReactPlayer from "react-player";
 
-// Post to /videos
-
-const sampleDataFormat = {
-  user_id: "string",
-  description: "string",
-  video_url: "string",
-  title: "string"
-}
-
 const validateVideo = video => {
   const errors = {};
   let hasErrors = false;
