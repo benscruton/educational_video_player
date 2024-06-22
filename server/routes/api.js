@@ -12,10 +12,8 @@ router.route("/videos/:videoId")
   .get(controller.getSingleVideo)
   .put(controller.editVideo);
 
-// router.route("/comments")
-//   .post(controller.createComment)
-
 router.route("/comments/:videoId")
-  .get(controller.getVideoComments);
+  .get(controller.getVideoComments)
+  .post(controller.createComment);
 
 module.exports = router;

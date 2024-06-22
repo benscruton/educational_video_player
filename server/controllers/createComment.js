@@ -17,8 +17,8 @@ const snake_case_comment = {
     content: req.body.content
   };
 
-  return axios.post(
-    `${serverData.url}/videos/comments`,
+  axios.post(
+    `${serverUrl}/videos/comments`,
     snake_case_comment
   )
     .then(() => {
@@ -28,13 +28,14 @@ const snake_case_comment = {
         fetch it here so we can use the ID.
       */
       axios.get(
-        `${serverUrl}/videos/comments?video_id=${req.body.videoId}`
+        `${serverUrl}/videos/comments?video_id=${req.params.videoId}`
       )
         .then(result => {
           const comments = result.data?.comments;
           comments.sort((a, b) =>
             dayjs(a.created_at) - dayjs(b.created_at)
           );
+          console.log(comments);
           const latestComment = comments[comments.length - 1];
           rsp.json({
             success: true,

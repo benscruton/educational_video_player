@@ -27,11 +27,14 @@ const VideoComments = ({videoId}) => {
   const addComment = e => {
     e.preventDefault();
 
-    createComment({
-      videoId,
-      userId,
-      content: inputContent
-    })
+    createComment(
+      {
+        videoId,
+        userId,
+        content: inputContent
+      },
+      serverUrl
+    )
       .then((result) => {
         console.log(result);
         if(!result.success){
