@@ -13,8 +13,12 @@ const VideoPlayerContainer = ({url}) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [playerFunctions, setPlayerFunctions] = useState(null);
-  const [volume, setVolume] = useState(70);
-  const [isVolumeMuted, setIsVolumeMuted] = useState(false);
+  const [volume, setVolume] = useState(
+    JSON.parse(localStorage.getItem("evp_volume"))?.volume || 70
+  );
+  const [isVolumeMuted, setIsVolumeMuted] = useState(
+    JSON.parse(localStorage.getItem("evp_volume"))?.isVolumeMuted || false
+  );
   const [isInstructionModalShown, setIsInstructionModalShown] = useState(false);
   const [hasSeenInstructions, setHasSeenInstructions] = useState(
     !!localStorage.getItem("evp_has_seen_instructions")

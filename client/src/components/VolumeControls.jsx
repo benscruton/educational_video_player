@@ -9,15 +9,43 @@ const VolumeControls = ({
   const adjustVolume = info => {
     if(info?.target?.value){
       setVolume(info.target.value);
+      localStorage.setItem(
+        "evp_volume",
+        JSON.stringify({
+          volume: info.target.value,
+          isVolumeMuted
+        })
+      );
     }
     else if(info === "quieter" && volume > 0){
       setVolume(volume - 5);
+      localStorage.setItem(
+        "evp_volume",
+        JSON.stringify({
+          volume: volume - 5,
+          isVolumeMuted
+        })
+      );
     }
     else if(info === "louder" && volume < 100){
       setVolume(volume + 5);
+      localStorage.setItem(
+        "evp_volume",
+        JSON.stringify({
+          volume: volume + 5,
+          isVolumeMuted
+        })
+      );
     }
     else if(info === "mute"){
       setIsVolumeMuted(!isVolumeMuted);
+      localStorage.setItem(
+        "evp_volume",
+        JSON.stringify({
+          volume,
+          isVolumeMuted: !isVolumeMuted
+        })
+      );
     }
   };
 
