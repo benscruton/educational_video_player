@@ -72,10 +72,6 @@ const VideoComments = ({videoId}) => {
         handleSubmit = {addComment}
         isDisabled = {!userId}
       />
-
-      <button onClick = {() => console.log(comments)} className = "button is-danger">
-        Log comments
-      </button>
     </>
   );
 };

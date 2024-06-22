@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  educational_video_player:
+    container_name: educational_video_player
+    build: .
+    ports:
+      - "8027:8000"
+    restart: unless-stopped
+    env_file:
+      - ./.env

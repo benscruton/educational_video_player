@@ -28,7 +28,10 @@ function App() {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const serverUrl = "http://localhost:8000"
+  const serverUrl = (process.env.NODE_ENV === "production" ?
+    "" : "http://localhost:8000"
+  );
+  
 
   return (
     <AppContext.Provider
