@@ -103,6 +103,7 @@ const VideoForm = ({
         <button
           className = "button is-success has-text-white"
           type = "submit"
+          disabled = {isDisabled}
         >
           <TextIcon
             text = "Add Video"

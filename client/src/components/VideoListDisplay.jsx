@@ -17,7 +17,7 @@ const VideoListDisplay = ({video}) => {
   }, [video.videoUrl]);
 
   return (
-    <div className = "column is-6-tablet is-4-desktop is-3-widescreen">
+    <div className = "column is-6-mobile is-4-tablet is-3-desktop is-one-fifth-widescreen">
       <Link
         className = "card"
         to = {`/videos/${video.userId}/${video.id}`}

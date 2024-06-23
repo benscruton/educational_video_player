@@ -39,6 +39,7 @@ const CommentForm = ({
         <button
           className = "button is-success"
           type = "submit"
+          disabled = {isDisabled}
         >
           Post
         </button>

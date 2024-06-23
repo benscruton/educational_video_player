@@ -5,7 +5,7 @@ import { VideoListDisplay } from "../components";
 import { AppContext } from "../context";
 
 const UserVideos = ({profileUserId}) => {
-  const {serverUrl} = useContext(AppContext);
+  const {userId, serverUrl} = useContext(AppContext);
   const [videos, setVideos] = useState(null);
   const [error, setError] = useState(null);
 
@@ -24,10 +24,14 @@ const UserVideos = ({profileUserId}) => {
   return (
     <>
       <h2 className = "is-size-3 has-text-centered mb-3">
-        Videos for user {profileUserId}
+        {userId && userId === profileUserId ?
+          "My Videos"
+          :
+          `Videos for user ${profileUserId}`
+        }
       </h2>
 
-      <div className = "columns is-multiline is-centered is-flex">
+      <div className = "columns is-multiline is-centered is-mobile">
         {error ? error :
           videos ?
             videos.length ?

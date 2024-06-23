@@ -1,26 +1,28 @@
+# Learnwell
+
 Hello! I am Ben Scruton, and this is my showcase for the 10Fold "Educational Video Player."
 
-# Technology and Features
+## Technology and Features
 
-## Technology
+### Technology
 
-I wrote my front end using React; in addition, I wrote a back-end Express server to serve the production build of the react project and proxy API requests so as to avoid CORS issues.
+I wrote my front end using React; in addition, I wrote a back-end Express server that a) serves the production build of the react project, and b) sends API requests to the server and does a little bit of data processing, to avoid CORS issues and help keep things organized.
 
-The video player itself as well as most of the controls are powered by the NPM package `react-player`; the only exception is the full screen button, which uses the `screenfull` package.
+The video player itself as well as almost all of the controls are powered by the NPM package `react-player`; the only exception is the full screen button, which uses the `screenfull` package.
 
-I used the CSS library Bulma for most of the styling: I've found it to be an excellent choice for React projects, because it's built entirely in CSS without any JavaScript. In my experience, other style libraries that do use JavaScript (for example, Materialize) can sometimes lead to conflicts with the React code that cause unexpected behaviors.
+I used the CSS library Bulma for most of the styling. Because it's built entirely in CSS without any JavaScript, I find it to be a good choice for JavaScript front end projects. In my experience, other style libraries that do use JavaScript (for example, Materialize) can sometimes lead to conflicts with the React code that cause unexpected behaviors.
 
-I also wrote one custom CSS module to style my video control component, as I wanted to have more precise control over where each control element ended up and what it looked like.
+I also wrote one custom CSS module to style my video control component, as I wanted to be able to adjust the layout and design of these controls a bit more precisely than the stock Bulma classes allow.
 
-A few other packages I used for solutions to more minor problems were:
+A few other packages that play smaller roles in the code are:
 
 - `dayjs` to format the timestamps on comments
 - `jstz` to determine the user's time zone, again for the comment timestamps
 - `axios` to streamline API calls, as I find the syntax a bit less verbose than the way JavaScript handles it natively
 
-## Features
+### Features
 
-### Navigation
+#### Navigation
 
 The site features a Bulma-styled navbar, featuring:
 
@@ -29,15 +31,23 @@ The site features a Bulma-styled navbar, featuring:
 - A login button
 - Once a user has logged in, they'll also see a direct link to their own videos
 
+<img alt = "Home page and nav bar, desktop view" src = "/demoImages/home-page-and-navbar.png" />
+
 It's optimized for mobile as well, so the links will collapse into an expandable menu on smaller screens.
 
-### Search functionality and video list
+<img alt = "Mobile nav bar" src = "/demoImages/mobile-menu.gif" />
+
+#### Search functionality and video list
 
 The search page is pretty straightforward -- enter a username, and it'll bring up a page with all of the videos that user has added.  The list of videos displays as a series of Bulma "Card" components, to keep things cleaner visually.
 
-If possible, the app will find a thumbnail image to use for the video; if this cannot be found, it just uses a stock video image that I created based on the provided logo.  The number of comments is also listed underneath the video
+<img alt = "Search page for finding user videos" src = "/demoImages/user-search.png" />
 
-### Adding videos
+If possible, the app will find a thumbnail image to use for the video; if this cannot be found, it just uses a stock video image that I created based on the provided logo.  The number of comments is also listed underneath the video.
+
+<img alt = "User page, showing a user's submitted videos" src = "/demoImages/user-video-page.png" />
+
+#### Adding videos
 
 The form used to add a video does require that a user be logged in, since a user_id attribute is required for each video submission.
 
@@ -47,7 +57,9 @@ When a user submit the form, the app will do some validation to make sure the in
 - The URL field cannot be empty, and must point to a playable video URL (a number of video sites are accepted, as well as direct links to video files like .mp4s)
 - The description field, however, *can* be left blank.
 
-### The video page
+<img alt = "Video form, showing an erroneous submission and the site's validation feedback" src = "/demoImages/video-form-with-validation.png" />
+
+#### The video page
 
 Clicking any card from a user's video list will open a page dedicated to that video, which features:
 
@@ -59,9 +71,21 @@ Clicking any card from a user's video list will open a page dedicated to that vi
 - A link back to the list of the user's videos
 - All comments on the video, as well as a box to add your own comment (which is disabled if the user isn't logged in).
 
+(The choppiness in the gif below is just my screen recorder -- the video plays smoothly on the actual site!)
+
+<img alt = "Demonstration of video controls" src = "/demoImages/playback-controls.gif" />
+
+<img alt = "Full screen demo" src = "demoImages/full-screen-controls.gif" />
+
 In addition, if a user is logged in and viewing a video that they uploaded, there is also an edit button.  Editing is handled without leaving the page, simply by turning the title and description fields into text inputs.
 
-### Other nifty features
+<img alt = "Editing video converts the title and description paragraphs to text inputs" src = "/demoImages/edit-video.gif" />
+
+Finally, all user comments for the video show up at the bottom of the page, with a textarea input at the end to add a new comment. This textarea is disabled if the user is not logged in.
+
+<img alt = "The comments section" src = "/demoImages/comments.png" />
+
+#### Other nifty features
 
 A few small things:
 
@@ -75,17 +99,17 @@ A few small things:
 
 - When logged in, any comments from the logged in user will show up in green with a "(me)" indicator next to their username
 
-# Running the project
+## Running the project
 
-There are a number of ways to run this project.  Here are a few of the best options:
+There are a number of ways to run this project, depending on where you want to be on the spectrum from production environment to development environment.
 
-## Online
+### Online
 
-The easiest way to view and test the project is to view it online; I've deployed it to:
+The easiest way to view and test the project is just to view it online! I've deployed it to:
 
 https://learnwell.benscruton.horse
 
-## Running locally
+### Running locally
 
 Note: these commands are all written from the perspective of a Linux user.  I believe everything would work the same in MacOS; it may be different in Windows.
 
@@ -102,10 +126,10 @@ Next, you'll need to create a `.env` file in the project's root directory, with 
 ```
 SERVER_URL="https://take-home-assessment-423502.uc.r.appspot.com"
 
-PORT=8000 # This can be omitted, as it defaults to port 8000.
+PORT=8000 ## This can be omitted, as it defaults to port 8000.
 ```
 
-### Docker
+#### Docker
 
 To run the project with Docker, make sure Docker is installed, and then run the following command:
 
@@ -117,7 +141,7 @@ Once it's built, it will be available at http://localhost:8027.  The port can be
 
 Note that if you change the port in the `.env` from the default 8000, you'll need to update that in the `docker-compose.yml` file as well.
 
-### Running locally in production mode
+#### Running locally in production mode
 
 To run the server in production mode, first build the production version of the application:
 
@@ -135,7 +159,7 @@ $ node server.js
 
 The project will be available at http://localhost:8000 (or whichever port is used in `.env`, if different).
 
-### Running locally in development mode
+#### Running locally in development mode
 
 To run in development mode, you will need to run the back end and front end servers separately.
 
@@ -145,7 +169,7 @@ First, start the back end server:
 $ node server.js
 ```
 
-If you are using a different port than 8000 to run the back end server, you'll need to update the port in `client/src/App.js` line 32.  If you're using the default, no edits needed!
+If you are using a different port than 8000 to run the back end server, you'll need to update the port in `client/src/App.js` line 32.  If you're using the default port 8000, no edits needed!
 
 Then, in a different terminal window, start the development React server:
 
@@ -154,5 +178,5 @@ $ cd client
 $ yarn start
 ```
 
-Finally, the project will be available at http://localhost:3000.
+The React project will be available at http://localhost:3000, and the Express server will be available at http://localhost:8000.
 
