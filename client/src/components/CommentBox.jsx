@@ -1,15 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context";
 import { formatCommentTime } from "../utils";
+import CommentForm from "./CommentForm";
 
 
-const CommentBox = ({comment}) => {
+const CommentBox = ({
+  comment,
+  isReply,
+  videoId,
+  comments,
+  setComments
+}) => {
   const {userId, userTimeZone} = useContext(AppContext);
   const isUserComment = userId === comment.userId;
+  const [isEditingReply, setIsEditingReply] = useState(false);
 
   return (
     <div
-      className = {`message has-background-light ${isUserComment ? "is-success" : "is-dark"}`}
+      className = {`message ${isUserComment ? "is-success" : "is-dark"} ${isReply ? "has-background-white mt-4" : "has-background-light"}`}
     >
       <header className = "message-header">
         <p className = "has-text-white">
@@ -20,7 +28,43 @@ const CommentBox = ({comment}) => {
         </p>
       </header>
       <div className = "message-body">
-        {comment.content}
+        <p className = "mb-3">
+          {comment.content}
+        </p>
+
+        {comment.replies?.map(reply =>
+          <CommentBox
+            key = {reply.id}
+            comment = {reply}
+            isReply = {true}
+          />
+        )}
+
+        {!isReply && isEditingReply ?
+          <div>
+            <CommentForm
+              videoId = {videoId}
+              comments = {comments}
+              setComments = {setComments}
+              isReply = {true}
+              replyTo = {comment.id}
+              closeReply = {() => setIsEditingReply(false)}
+            />
+          </div>
+          :
+          <></>
+        }
+
+        {(!isReply && !isEditingReply) ?
+          <button
+            className = {`button ${isEditingReply ? "is-danger" : "is-dark"}`}
+            onClick = {() => setIsEditingReply(true)}
+          >
+            Reply
+          </button>
+          :
+          <></>
+        }
       </div>
     </div>
   );

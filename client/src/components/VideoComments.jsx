@@ -12,7 +12,43 @@ const VideoComments = ({videoId}) => {
   useEffect(() => {
     getVideoComments(videoId, serverUrl)
       .then(videoComments => {
-        setComments(videoComments);
+        const commentReplies = [];
+        for(let comment of videoComments){
+          let isReply = false;
+          let replyTo = null;
+          let replyContent = null;
+          try{
+            const data = JSON.parse(comment.content);
+            isReply = data.isReply;
+            replyTo = data.replyTo;
+            replyContent = data.content;
+          }
+          catch(e){}
+
+          if(isReply && replyTo && replyContent){
+            const parentComment = commentReplies.find(c => c.id === replyTo);
+            if(parentComment){
+              parentComment.replies.push({
+                ...comment,
+                content: replyContent
+              });
+            }
+            else{
+              commentReplies.push({
+                ...comment,
+                content: replyContent,
+                replies: []
+              });
+            }
+          }
+          else{
+            commentReplies.push({
+              ...comment,
+              replies: []
+            });
+          }
+        }
+        setComments(commentReplies);
       })
       .catch(e => console.log(e));
   }, [videoId]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -28,6 +64,10 @@ const VideoComments = ({videoId}) => {
           <CommentBox
             key = {c.id}
             comment = {c}
+            isReply = {false}
+            videoId = {videoId}
+            comments = {comments}
+            setComments = {setComments}
           />
         )
         :

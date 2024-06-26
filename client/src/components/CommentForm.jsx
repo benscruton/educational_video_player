@@ -5,7 +5,10 @@ import { createComment } from "../utils/api";
 const CommentForm = ({
   videoId,
   comments,
-  setComments
+  setComments,
+  isReply,
+  replyTo,
+  closeReply
 }) => {
   const {userId, serverUrl} = useContext(AppContext);
 
@@ -19,6 +22,53 @@ const CommentForm = ({
     setInputError("");
   };
 
+  // const addComment = e => {
+  //   e.preventDefault();
+
+  //   if(!inputContent){
+  //     return setInputError("Your comment cannot be empty.");
+  //   }
+
+  //   const comment = {
+  //     videoId,
+  //     userId
+  //   }
+
+  //   if(isReply){
+  //     comment.content = JSON.stringify({
+  //       isReply,
+  //       replyTo,
+  //       content: inputContent
+  //     });
+  //     setComments(comments.map(c => {
+  //       if(c.id !== replyTo) return c;
+  //       return {
+  //         ...c,
+  //         replies: [
+  //           ...c.replies,
+  //           {
+  //             ...comment,
+  //             content: inputContent
+  //           }
+  //         ]
+  //       }
+  //     }));
+  //     closeReply();
+  //   }
+
+  //   else{
+  //     comment.content = inputContent;
+  //     setComments([
+  //       ...comments,
+  //       {...comment,
+  //         replies: []
+  //       }
+  //     ]);
+  //   }
+
+  //   setInputContent("");
+  // };
+
   const addComment = e => {
     e.preventDefault();
 
@@ -30,7 +80,14 @@ const CommentForm = ({
       {
         videoId,
         userId,
-        content: inputContent
+        content: isReply && replyTo ?
+          JSON.stringify({
+            isReply,
+            replyTo,
+            content: inputContent
+          })
+          :
+          inputContent
       },
       serverUrl
     )
@@ -38,9 +95,30 @@ const CommentForm = ({
         if(!result.success){
           return setInputError(result?.errors?.content || "Sorry, something went wrong.");
         }
-        setComments([...comments,
-          result.comment
-        ]);
+        if(isReply){
+          setComments(comments.map(c => {
+            if(c.id !== replyTo) return c;
+            return {
+              ...c,
+              replies: [
+                ...c.replies,
+                {
+                  ...result.comment,
+                  content: inputContent
+                }
+              ]
+            }
+          }));
+          closeReply();
+        }
+        else{
+          setComments([...comments,
+            {
+              ...result.comment,
+              replies: []
+            }
+          ]);
+        }
         setInputContent("");
       })
       .catch(e => console.log(e));
@@ -48,12 +126,12 @@ const CommentForm = ({
 
   return (
     <form
-      className = "card"
+      className = "card mb-4"
       onSubmit = {addComment}
     >
       <header className = "card-header">
         <p className = "card-header-title">
-          Add a comment
+          Add a {isReply ? "reply" : "comment"}
         </p>
       </header>
 
@@ -78,12 +156,23 @@ const CommentForm = ({
         </p>
 
         <button
-          className = "button is-success mt-3"
+          className = "button is-success mt-1"
           type = "submit"
           disabled = {isDisabled}
         >
           Post
         </button>
+        {
+          isReply ?
+            <button
+              className = "button is-danger mt-1 ml-2"
+              onClick = {closeReply}
+            >
+              Cancel
+            </button>
+            :
+            <></>
+        }
       </div>
     </form>
   );
