@@ -65,7 +65,7 @@ Clicking any card from a user's video list will open a page dedicated to that vi
 
 - The video's title at the top
 - The actual video player
-- The video controls, which show up directly underneath the video (or, in full screen mode, are overlaid along the bottom of the video)
+- The video controls, which show up directly underneath the video
 - A link to open the video's original source in a new tab
 - The video's description as provided by the user
 - A link back to the list of the user's videos
@@ -74,6 +74,8 @@ Clicking any card from a user's video list will open a page dedicated to that vi
 (The choppiness in the gif below is just my screen recorder -- the video plays smoothly on the actual site!)
 
 <img alt = "Demonstration of video controls" src = "/demoImages/playback-controls.gif" />
+
+In full screen mode, the video controls move to an overlay superimposed over the bottom portion of the video. When hovering over this section of the video (or tapping it on a touch-screen device), the controls are visible; as soon as the cursor is moved to another area, the controls disappear so the user can see the full video uninterrupted.
 
 <img alt = "Full screen demo" src = "demoImages/full-screen-controls.gif" />
 
