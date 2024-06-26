@@ -1,14 +1,55 @@
+import { useContext, useState } from "react";
+import { AppContext } from "../context";
+import { createComment } from "../utils/api";
+
 const CommentForm = ({
-  error,
-  content,
-  handleChange,
-  handleSubmit,
-  isDisabled
+  videoId,
+  comments,
+  setComments
 }) => {
+  const {userId, serverUrl} = useContext(AppContext);
+
+  const [inputContent, setInputContent] = useState("");
+  const [inputError, setInputError] = useState("");
+
+  const isDisabled = !userId;
+
+  const handleChange = e => {
+    setInputContent(e.target.value);
+    setInputError("");
+  };
+
+  const addComment = e => {
+    e.preventDefault();
+
+    if(!inputContent){
+      return setInputError("Your comment cannot be empty.");
+    }
+
+    createComment(
+      {
+        videoId,
+        userId,
+        content: inputContent
+      },
+      serverUrl
+    )
+      .then((result) => {
+        if(!result.success){
+          return setInputError(result?.errors?.content || "Sorry, something went wrong.");
+        }
+        setComments([...comments,
+          result.comment
+        ]);
+        setInputContent("");
+      })
+      .catch(e => console.log(e));
+  };
+
   return (
     <form
       className = "card"
-      onSubmit = {handleSubmit}
+      onSubmit = {addComment}
     >
       <header className = "card-header">
         <p className = "card-header-title">
@@ -26,18 +67,18 @@ const CommentForm = ({
             <></>
           }
           <textarea
-            className = "textarea"
+            className = {`textarea ${inputError ? "is-danger" : ""}`}
             onChange = {handleChange}
-            value = {content}
+            value = {inputContent}
             disabled = {isDisabled}
           />
         </div>
         <p className = "help is-danger">
-          {error}
+          {inputError}
         </p>
 
         <button
-          className = "button is-success"
+          className = "button is-success mt-3"
           type = "submit"
           disabled = {isDisabled}
         >

@@ -27,7 +27,6 @@ const snake_case_comment = {
           comments.sort((a, b) =>
             dayjs(a.created_at) - dayjs(b.created_at)
           );
-          console.log(comments);
           const latestComment = comments[comments.length - 1];
           rsp.json({
             success: true,
