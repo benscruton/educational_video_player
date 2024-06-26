@@ -149,6 +149,7 @@ const CommentForm = ({
             onChange = {handleChange}
             value = {inputContent}
             disabled = {isDisabled}
+            autoFocus = {isReply}
           />
         </div>
         <p className = "help is-danger">

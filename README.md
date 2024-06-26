@@ -83,13 +83,18 @@ In addition, if a user is logged in and viewing a video that they uploaded, ther
 
 Finally, all user comments for the video show up at the bottom of the page, with a textarea input at the end to add a new comment. This textarea is disabled if the user is not logged in.
 
+I've also added an advanced feature that allows users to reply to top-level comments. This is handled by submitting a stringified JSON as the comment's `content` attribute, which contains a boolean `isReply` set to "true" and a `replyTo` attribute set to the ID of the parent comment, as well as a `content` attribute of its own that will actually be displayed as the reply content.
+
 <img alt = "The comments section" src = "/demoImages/comments.png" />
+
 
 #### Other nifty features
 
 A few small things:
 
 - When a user enters full screen mode for the first time, they'll see a pop-up with some brief instructions for using and hiding the controls.  This only shows up once (per browser), and is indicated in localStorage so that it won't show up again.
+
+<img alt = "The instruction pop-up when a user enters full screen the first time" src = "/demoImages/full-screen-instructions.png" />
 
 - When a user adds a video, they'll be redirected to the page for the video they've just added.  This was a little tricky since the API response to the Create Video route doesn't give you back the new video's ID, so once it's been created I make a second API call on the back end to find the most recently added video and then grab the ID from there.
 
